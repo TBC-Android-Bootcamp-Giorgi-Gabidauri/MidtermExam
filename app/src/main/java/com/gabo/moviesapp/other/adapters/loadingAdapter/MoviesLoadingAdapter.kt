@@ -1,4 +1,4 @@
-package com.gabo.moviesapp.util.adapters.loadingAdapter
+package com.gabo.moviesapp.other.adapters.loadingAdapter
 
 import android.content.Context
 import android.view.LayoutInflater

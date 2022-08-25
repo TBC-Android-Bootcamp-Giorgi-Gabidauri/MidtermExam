@@ -1,4 +1,4 @@
-package com.gabo.moviesapp.util.responseHelpers
+package com.gabo.moviesapp.other.responseHelpers
 
 import kotlinx.coroutines.flow.flow
 import retrofit2.Response

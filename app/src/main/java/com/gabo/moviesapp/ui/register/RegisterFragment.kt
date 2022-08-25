@@ -1,7 +1,7 @@
 package com.gabo.moviesapp.ui.register
 
 import android.os.Bundle
-import com.gabo.moviesapp.util.base.BaseFragment
+import com.gabo.moviesapp.other.base.BaseFragment
 import com.gabo.moviesapp.databinding.FragmentRegisterBinding
 
 class RegisterFragment : BaseFragment<RegisterViewModel, FragmentRegisterBinding>(

@@ -3,9 +3,8 @@ package com.gabo.moviesapp.ui.loggedIn
 import android.os.Bundle
 import androidx.navigation.Navigation
 import androidx.navigation.ui.NavigationUI.setupWithNavController
-import com.gabo.moviesapp.R
 import com.gabo.moviesapp.databinding.FragmentLoggedInBinding
-import com.gabo.moviesapp.util.base.BaseFragment
+import com.gabo.moviesapp.other.base.BaseFragment
 
 
 class LoggedInFragment : BaseFragment<LoggedInViewModel, FragmentLoggedInBinding>(

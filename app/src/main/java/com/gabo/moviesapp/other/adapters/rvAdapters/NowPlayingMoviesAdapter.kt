@@ -1,16 +1,14 @@
-package com.gabo.moviesapp.util.adapters.rvAdapters
+package com.gabo.moviesapp.other.adapters.rvAdapters
 
 import android.view.LayoutInflater
 import android.view.ViewGroup
 import androidx.paging.PagingDataAdapter
 import androidx.recyclerview.widget.RecyclerView
 import com.bumptech.glide.Glide
-import com.gabo.moviesapp.data.models.genreModels.GenreModel
 import com.gabo.moviesapp.data.models.movieModels.MovieModel
 import com.gabo.moviesapp.databinding.NowPlayingMovieItemBinding
-import com.gabo.moviesapp.databinding.PopularMovieItemBinding
-import com.gabo.moviesapp.util.adapters.diffCallback.MovieDiffCallback
-import com.gabo.moviesapp.util.common.BASE_IMAGE_URL
+import com.gabo.moviesapp.other.adapters.diffCallback.MovieDiffCallback
+import com.gabo.moviesapp.other.common.BASE_IMAGE_URL
 
 class NowPlayingMoviesAdapter(private val click: (MovieModel) -> Unit) :
     PagingDataAdapter<MovieModel, NowPlayingMoviesAdapter.MovieVH>(MovieDiffCallback()) {

@@ -1,4 +1,4 @@
-package com.gabo.moviesapp.util.adapters.genresAdapter
+package com.gabo.moviesapp.other.adapters.genresAdapter
 
 import android.annotation.SuppressLint
 import android.view.LayoutInflater

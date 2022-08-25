@@ -1,4 +1,4 @@
-package com.gabo.moviesapp.util.adapters.rvAdapters
+package com.gabo.moviesapp.other.adapters.rvAdapters
 
 import android.annotation.SuppressLint
 import android.view.LayoutInflater
@@ -10,9 +10,9 @@ import com.bumptech.glide.Glide
 import com.gabo.moviesapp.data.models.genreModels.GenreModel
 import com.gabo.moviesapp.data.models.movieModels.MovieModel
 import com.gabo.moviesapp.databinding.PopularMovieItemBinding
-import com.gabo.moviesapp.util.adapters.diffCallback.MovieDiffCallback
-import com.gabo.moviesapp.util.adapters.genresAdapter.GenresAdapter
-import com.gabo.moviesapp.util.common.BASE_IMAGE_URL
+import com.gabo.moviesapp.other.adapters.diffCallback.MovieDiffCallback
+import com.gabo.moviesapp.other.adapters.genresAdapter.GenresAdapter
+import com.gabo.moviesapp.other.common.BASE_IMAGE_URL
 
 class PopularMoviesAdapter(private val click: (MovieModel) -> Unit) :
     PagingDataAdapter<MovieModel, PopularMoviesAdapter.MovieVH>(MovieDiffCallback()) {

@@ -1,4 +1,4 @@
-package com.gabo.moviesapp.util.common
+package com.gabo.moviesapp.other.common
 
 import androidx.lifecycle.Lifecycle
 import androidx.lifecycle.LifecycleOwner

@@ -1,4 +1,4 @@
-package com.gabo.moviesapp.util.common
+package com.gabo.moviesapp.other.common
 
 import android.view.LayoutInflater
 import android.view.ViewGroup
