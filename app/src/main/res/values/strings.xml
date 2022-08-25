@@ -1,0 +1,17 @@
+<resources>
+    <string name="app_name">Movies App</string>
+    <string name="network_error">Network Error</string>
+    <string name="home">Home</string>
+    <string name="search">Search</string>
+    <string name="profile">Profile</string>
+    <string name="horror">Horror</string>
+    <string name="poster">poster</string>
+    <string name="spider_man">Spider-man</string>
+    <string name="star">star</string>
+    <string name="rating">4.3</string>
+    <string name="venom_let_there_be_carnage">Venom Let There Be Carnage</string>
+    <string name="description">Description</string>
+    <string name="retry">Retry</string>
+    <string name="now_streaming">Now Streaming</string>
+    <string name="popular">Popular</string>
+</resources>
