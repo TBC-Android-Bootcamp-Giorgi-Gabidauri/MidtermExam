@@ -1,4 +1,4 @@
-package com.gabo.moviesapp.util.responseHelpers
+package com.gabo.moviesapp.other.responseHelpers
 
 sealed class ResponseHandler<T : Any> {
     data class Success<T : Any>(val data: T?) : ResponseHandler<T>()

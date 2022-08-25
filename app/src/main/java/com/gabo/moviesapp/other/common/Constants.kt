@@ -1,4 +1,4 @@
-package com.gabo.moviesapp.util.common
+package com.gabo.moviesapp.other.common
 
 const val API_KEY = "938eec1132c5f17fa4284f5d8940768b"
 const val BASE_URL = "https://api.themoviedb.org"

@@ -1,4 +1,4 @@
-package com.gabo.moviesapp.util.base
+package com.gabo.moviesapp.other.base
 
 import android.os.Bundle
 import android.view.LayoutInflater
@@ -7,7 +7,7 @@ import android.view.ViewGroup
 import androidx.fragment.app.Fragment
 import androidx.lifecycle.ViewModel
 import androidx.viewbinding.ViewBinding
-import com.gabo.moviesapp.util.common.Inflater
+import com.gabo.moviesapp.other.common.Inflater
 import org.koin.androidx.viewmodel.ext.android.viewModel
 import kotlin.reflect.KClass
 

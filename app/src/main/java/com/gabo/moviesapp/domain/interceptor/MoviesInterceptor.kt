@@ -1,6 +1,6 @@
 package com.gabo.moviesapp.domain.interceptor
 
-import com.gabo.moviesapp.util.common.API_KEY
+import com.gabo.moviesapp.other.common.API_KEY
 import okhttp3.Interceptor
 
 class MoviesInterceptor  : Interceptor {

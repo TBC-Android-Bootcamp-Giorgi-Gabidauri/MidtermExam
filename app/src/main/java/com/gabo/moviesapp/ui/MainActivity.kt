@@ -7,7 +7,7 @@ import androidx.lifecycle.lifecycleScope
 import androidx.lifecycle.repeatOnLifecycle
 import com.gabo.moviesapp.data.models.genreModels.GenreModel
 import com.gabo.moviesapp.databinding.ActivityMainBinding
-import com.gabo.moviesapp.util.responseHelpers.ResponseHandler
+import com.gabo.moviesapp.other.responseHelpers.ResponseHandler
 import kotlinx.coroutines.launch
 import org.koin.androidx.viewmodel.ext.android.viewModel
 

@@ -1,4 +1,4 @@
-package com.gabo.moviesapp.util.adapters.diffCallback
+package com.gabo.moviesapp.other.adapters.diffCallback
 
 import androidx.recyclerview.widget.DiffUtil
 import com.gabo.moviesapp.data.models.movieModels.MovieModel

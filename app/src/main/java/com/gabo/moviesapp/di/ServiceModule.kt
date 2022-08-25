@@ -1,6 +1,6 @@
 package com.gabo.moviesapp.di
 
-import com.gabo.moviesapp.util.common.BASE_URL
+import com.gabo.moviesapp.other.common.BASE_URL
 import com.gabo.moviesapp.data.service.MoviesService
 import com.gabo.moviesapp.domain.interceptor.MoviesInterceptor
 import okhttp3.OkHttpClient
