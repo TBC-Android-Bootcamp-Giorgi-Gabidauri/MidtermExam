@@ -10,6 +10,10 @@
         android:icon="@drawable/ic_baseline_search_24"
         android:title="@string/search" />
     <item
+        android:id="@+id/favouritesFragment"
+        android:icon="@drawable/ic_star"
+        android:title="@string/favourites" />
+    <item
         android:id="@+id/profileFragment"
         android:icon="@drawable/ic_baseline_person_24"
         android:title="@string/profile" />

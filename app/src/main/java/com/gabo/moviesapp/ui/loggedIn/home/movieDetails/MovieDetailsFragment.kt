@@ -63,7 +63,7 @@ class MovieDetailsFragment : BaseFragment<MovieDetailsViewModel, FragmentMovieDe
         with(binding) {
             Glide.with(requireContext()).load(BASE_IMAGE_URL + movieModel.backdropPath)
                 .into(ivPoster)
-            tvDescription.text = movieModel.overview
+            tvDescriptionText.text = movieModel.overview
             tvTitle.text = movieModel.title
             tvRating.text = movieModel.Rating.toString()
 

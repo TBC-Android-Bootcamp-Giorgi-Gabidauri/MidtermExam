@@ -12,6 +12,7 @@ import com.gabo.moviesapp.other.adapters.loadingAdapter.MoviesLoadingAdapter
 import com.gabo.moviesapp.other.adapters.rvAdapters.NowPlayingMoviesAdapter
 import com.gabo.moviesapp.other.base.BaseFragment
 import com.gabo.moviesapp.other.common.launchStarted
+import com.gabo.moviesapp.ui.loggedIn.ViewPagerContainerFragmentDirections
 import kotlinx.android.synthetic.main.loading_item.*
 
 class HomeFragment : BaseFragment<HomeViewModel, FragmentHomeBinding>(
@@ -20,7 +21,11 @@ class HomeFragment : BaseFragment<HomeViewModel, FragmentHomeBinding>(
 ) {
     private val popularMoviesAdapter: PopularMoviesAdapter by lazy {
         PopularMoviesAdapter {
-            findNavController().navigate(HomeFragmentDirections.actionHomeFragmentToMovieDetailsFragment(it))
+            findNavController().navigate(
+                ViewPagerContainerFragmentDirections.actionViewPagerContainerFragmentToMovieDetailsFragment(
+                    it
+                )
+            )
         }.also {
             binding.rvPopularMovies.adapter = it
 //                .withLoadStateFooter(
@@ -31,7 +36,11 @@ class HomeFragment : BaseFragment<HomeViewModel, FragmentHomeBinding>(
     }
     private val nowPlayingMoviesAdapter: NowPlayingMoviesAdapter by lazy {
         NowPlayingMoviesAdapter {
-            findNavController().navigate(HomeFragmentDirections.actionHomeFragmentToMovieDetailsFragment(it))
+            findNavController().navigate(
+                ViewPagerContainerFragmentDirections.actionViewPagerContainerFragmentToMovieDetailsFragment(
+                    it
+                )
+            )
         }.also {
             binding.rvNowPlayingMovies.adapter = it.withLoadStateFooter(
                 footer = MoviesLoadingAdapter(requireContext()) { it.retry() })
@@ -50,7 +59,7 @@ class HomeFragment : BaseFragment<HomeViewModel, FragmentHomeBinding>(
     }
 
     private fun setupObservers() {
-        launchStarted(viewLifecycleOwner){
+        launchStarted(viewLifecycleOwner) {
             with(viewModel) {
                 getNowPlayingMovies().collect {
                     nowPlayingMoviesAdapter.submitData(it)
@@ -60,7 +69,7 @@ class HomeFragment : BaseFragment<HomeViewModel, FragmentHomeBinding>(
                 pfRetryState.isVisible = loadStates.refresh !is LoadState.Loading
             }
         }
-        launchStarted(viewLifecycleOwner){
+        launchStarted(viewLifecycleOwner) {
             with(viewModel) {
                 getPopularMovies().collect {
                     popularMoviesAdapter.submitData(it)
