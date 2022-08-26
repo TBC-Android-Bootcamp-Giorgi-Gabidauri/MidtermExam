@@ -13,18 +13,33 @@
         android:layout_height="wrap_content">
 
         <TextView
-            android:id="@+id/tvNowPlaying"
+            android:id="@+id/tvNowStreaming"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
             android:textColor="@color/white"
             android:text="@string/now_streaming"
             android:textSize="@dimen/dimen_16sp"
+            android:layout_marginTop="@dimen/dimen_16dp"
             android:textStyle="bold"
             app:layout_constraintStart_toStartOf="parent"
             app:layout_constraintTop_toTopOf="parent" />
 
+        <androidx.appcompat.widget.AppCompatButton
+            android:layout_width="wrap_content"
+            android:layout_height="0dp"
+            android:text="@string/see_more"
+            android:id="@+id/btnSeeMoreNowStreaming"
+            android:textSize="12sp"
+            app:layout_constraintBottom_toBottomOf="@id/tvNowStreaming"
+            android:textAllCaps="false"
+            app:layout_constraintEnd_toEndOf="parent"
+            app:layout_constraintTop_toTopOf="@id/tvNowStreaming"
+            android:background="@drawable/bg_genre"
+            android:textColor="@color/white"/>
+
+
         <androidx.recyclerview.widget.RecyclerView
-            android:id="@+id/rvNowPlayingMovies"
+            android:id="@+id/rvNowStreamingMovies"
             android:layout_width="match_parent"
             android:layout_height="0dp"
             android:background="@color/bg_gray"
@@ -33,8 +48,8 @@
             app:layoutManager="androidx.recyclerview.widget.LinearLayoutManager"
             app:layout_constraintEnd_toEndOf="parent"
             app:layout_constraintStart_toStartOf="parent"
-            app:layout_constraintTop_toBottomOf="@id/tvNowPlaying"
-            tools:listitem="@layout/now_playing_movie_item" />
+            app:layout_constraintTop_toBottomOf="@id/tvNowStreaming"
+            tools:listitem="@layout/now_streaming_movie_item" />
 
         <TextView
             android:id="@+id/tvPopular"
@@ -46,7 +61,7 @@
             android:textSize="@dimen/dimen_16sp"
             android:textStyle="bold"
             app:layout_constraintStart_toStartOf="parent"
-            app:layout_constraintTop_toBottomOf="@id/rvNowPlayingMovies" />
+            app:layout_constraintTop_toBottomOf="@id/rvNowStreamingMovies" />
 
         <androidx.recyclerview.widget.RecyclerView
             android:id="@+id/rvPopularMovies"

@@ -5,7 +5,6 @@
     android:layout_width="match_parent"
     android:layout_height="wrap_content"
     android:background="@color/bg_gray"
-    android:padding="@dimen/dimen_16dp"
     tools:context=".ui.loggedIn.home.movieDetails.MovieDetailsFragment">
 
     <androidx.constraintlayout.widget.ConstraintLayout
@@ -16,21 +15,30 @@
             android:id="@+id/ivPoster"
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
+            android:contentDescription="@string/poster"
             android:src="@drawable/ic_launcher_background"
             app:layout_constraintEnd_toEndOf="parent"
             app:layout_constraintStart_toStartOf="parent"
-            app:layout_constraintTop_toTopOf="parent"
-            android:contentDescription="@string/poster" />
-
+            app:layout_constraintTop_toTopOf="parent" />
+        <ImageView
+            android:layout_width="match_parent"
+            android:layout_height="60dp"
+            android:src="@drawable/bg_detail_divider"
+            android:id="@+id/ivBgDivider"
+            app:layout_constraintBottom_toTopOf="@id/tvTitle"
+            app:layout_constraintStart_toStartOf="parent"
+            app:layout_constraintEnd_toEndOf="parent"
+            android:contentDescription="@string/divider" />
         <TextView
             android:id="@+id/tvTitle"
             android:layout_width="0dp"
-            android:layout_marginTop="@dimen/dimen_16dp"
             android:layout_height="wrap_content"
+            android:layout_marginStart="@dimen/dimen_16dp"
+            android:layout_marginTop="@dimen/dimen_16dp"
+            android:layout_marginEnd="@dimen/dimen_16dp"
             android:text="@string/spider_man"
-            android:layout_marginStart="@dimen/dimen_8dp"
-            android:textSize="20sp"
             android:textColor="@color/white"
+            android:textSize="20sp"
             app:layout_constraintEnd_toEndOf="parent"
             app:layout_constraintStart_toStartOf="parent"
             app:layout_constraintTop_toBottomOf="@id/ivPoster" />
@@ -38,21 +46,21 @@
         <ImageView
             android:id="@+id/ivStar"
             android:layout_width="wrap_content"
-            android:layout_marginTop="@dimen/dimen_16dp"
             android:layout_height="wrap_content"
-            android:layout_marginStart="8dp"
+            android:layout_marginStart="@dimen/dimen_16dp"
+            android:layout_marginTop="@dimen/dimen_16dp"
+            android:contentDescription="@string/star"
             android:src="@drawable/ic_star"
             app:layout_constraintStart_toStartOf="parent"
-            app:layout_constraintTop_toBottomOf="@id/tvTitle"
-            android:contentDescription="@string/star" />
+            app:layout_constraintTop_toBottomOf="@id/tvTitle" />
 
         <TextView
             android:id="@+id/tvRating"
-            android:layout_marginStart="@dimen/dimen_8dp"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
-            android:textColor="@color/txt_gray"
+            android:layout_marginStart="@dimen/dimen_8dp"
             android:text="@string/rating"
+            android:textColor="@color/txt_gray"
             app:layout_constraintBottom_toBottomOf="@id/ivStar"
             app:layout_constraintStart_toEndOf="@id/ivStar"
             app:layout_constraintTop_toTopOf="@id/ivStar" />
@@ -73,9 +81,10 @@
             android:id="@+id/tvDescription"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
-            android:textColor="@color/white"
             android:layout_marginTop="@dimen/dimen_16dp"
             android:text="@string/description"
+            android:layout_marginStart="@dimen/dimen_16dp"
+            android:textColor="@color/white"
             android:textSize="20sp"
             app:layout_constraintStart_toStartOf="parent"
             app:layout_constraintTop_toBottomOf="@id/rvGenres" />
@@ -83,29 +92,49 @@
         <TextView
             android:id="@+id/tvDescriptionText"
             android:layout_width="match_parent"
-            android:textColor="@color/txt_gray"
             android:layout_height="wrap_content"
+            android:layout_marginStart="@dimen/dimen_16dp"
+            android:layout_marginEnd="@dimen/dimen_16dp"
             android:layout_marginTop="@dimen/dimen_16dp"
+            android:textColor="@color/txt_gray"
             app:layout_constraintStart_toStartOf="parent"
             app:layout_constraintTop_toBottomOf="@id/tvDescription" />
 
         <com.pierfrancescosoffritti.androidyoutubeplayer.core.player.views.YouTubePlayerView
+            android:id="@+id/youtubeView"
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
             android:layout_marginTop="@dimen/dimen_16dp"
-            app:layout_constraintStart_toStartOf="parent"
+            android:layout_marginStart="@dimen/dimen_16dp"
+            android:layout_marginEnd="@dimen/dimen_16dp"
             app:layout_constraintEnd_toEndOf="parent"
-            app:layout_constraintTop_toBottomOf="@id/tvDescriptionText"
-            android:id="@+id/youtubeView"/>
+            app:layout_constraintStart_toStartOf="parent"
+            app:layout_constraintTop_toBottomOf="@id/tvDescriptionText" />
+
+        <TextView
+            android:id="@+id/tvSimilarMovies"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_marginTop="@dimen/dimen_16dp"
+            android:text="@string/similar_movies"
+            android:layout_marginStart="@dimen/dimen_16dp"
+            android:layout_marginEnd="@dimen/dimen_16dp"
+            android:textColor="@color/white"
+            android:textSize="20sp"
+            app:layout_constraintStart_toStartOf="parent"
+            app:layout_constraintTop_toBottomOf="@id/youtubeView" />
+
         <androidx.recyclerview.widget.RecyclerView
             android:id="@+id/rvSimilarMovies"
             android:layout_width="match_parent"
+            android:layout_marginStart="@dimen/dimen_16dp"
+            android:layout_marginEnd="@dimen/dimen_16dp"
             android:layout_height="wrap_content"
-            app:layout_goneMarginTop="@dimen/dimen_16dp"
-            android:layout_marginTop="8dp"
+            android:layout_marginTop="@dimen/dimen_8dp"
             app:layout_constraintEnd_toEndOf="parent"
             app:layout_constraintStart_toStartOf="parent"
-            app:layout_constraintTop_toBottomOf="@id/youtubeView"
+            app:layout_constraintTop_toBottomOf="@id/tvSimilarMovies"
+            app:layout_goneMarginTop="@dimen/dimen_16dp"
             tools:listitem="@layout/popular_movie_item" />
 
 

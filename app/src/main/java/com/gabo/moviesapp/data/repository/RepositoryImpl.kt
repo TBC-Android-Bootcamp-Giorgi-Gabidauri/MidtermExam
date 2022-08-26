@@ -11,8 +11,8 @@ class RepositoryImpl(private val moviesService: MoviesService) : Repository {
         return moviesService.getPopularMovies(page)
     }
 
-    override suspend fun getSimilarMovies(page: Int,movieId: Int): Response<MoviesModel> {
-        return moviesService.getSimilarMovies(page,movieId)
+    override suspend fun getSimilarMovies(movieId: Int): Response<MoviesModel> {
+        return moviesService.getSimilarMovies(movieId)
     }
 
     override suspend fun searchMovies(page: Int, query: String): Response<MoviesModel> {

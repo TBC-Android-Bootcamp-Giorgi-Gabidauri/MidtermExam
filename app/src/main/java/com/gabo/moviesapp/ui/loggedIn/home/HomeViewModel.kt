@@ -7,11 +7,14 @@ import androidx.paging.PagingConfig
 import androidx.paging.PagingData
 import androidx.paging.cachedIn
 import com.gabo.moviesapp.data.models.movieModels.MovieModel
+import com.gabo.moviesapp.data.models.movieModels.MoviesModel
 import com.gabo.moviesapp.data.paging.NowPlayingMoviesPagingSource
 import com.gabo.moviesapp.data.paging.PopularMoviesPagingSource
 import com.gabo.moviesapp.domain.usecases.GetNowPlayingMoviesUseCase
 import com.gabo.moviesapp.domain.usecases.GetPopularMoviesUseCase
+import com.gabo.moviesapp.other.responseHelpers.ResponseHandler
 import kotlinx.coroutines.flow.Flow
+import kotlinx.coroutines.flow.flow
 
 class HomeViewModel(
     private val getPopularMoviesUseCase: GetPopularMoviesUseCase,
@@ -28,15 +31,12 @@ class HomeViewModel(
             }
         ).flow.cachedIn(viewModelScope)
     }
-
-    fun getNowPlayingMovies(): Flow<PagingData<MovieModel>> {
-        return Pager(
-            config = PagingConfig(
-                pageSize = 20
-            ),
-            pagingSourceFactory = {
-                NowPlayingMoviesPagingSource(getNowPlayingMoviesUseCase)
-            }
-        ).flow.cachedIn(viewModelScope)
+    fun getNowPlayingMovies()= flow {
+        val response = getNowPlayingMoviesUseCase(1)
+        if (response.isSuccessful){
+            emit(ResponseHandler.Success(response.body()!!))
+        }else{
+            emit(ResponseHandler.Error(response.errorBody()?.string()))
+        }
     }
 }
