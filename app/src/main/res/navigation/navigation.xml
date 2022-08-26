@@ -53,5 +53,9 @@
         android:id="@+id/seeMoreNowStreamingFragment"
         android:name="com.gabo.moviesapp.ui.loggedIn.home.seeMoreNowStreaming.SeeMoreNowStreamingFragment"
         android:label="fragment_see_more_now_streaming"
-        tools:layout="@layout/fragment_see_more_now_streaming" />
+        tools:layout="@layout/fragment_see_more_now_streaming" >
+        <action
+            android:id="@+id/action_seeMoreNowStreamingFragment_to_movieDetailsFragment"
+            app:destination="@id/movieDetailsFragment" />
+    </fragment>
 </navigation>

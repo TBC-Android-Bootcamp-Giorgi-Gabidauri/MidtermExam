@@ -6,7 +6,7 @@ import com.gabo.moviesapp.data.models.movieModels.MovieModel
 import com.gabo.moviesapp.domain.usecases.GetNowPlayingMoviesUseCase
 import kotlinx.coroutines.delay
 
-class NowPlayingMoviesPagingSource(private val getNowPlayingMoviesUseCase: GetNowPlayingMoviesUseCase) :
+class NowStreamingMoviesPagingSource(private val getNowPlayingMoviesUseCase: GetNowPlayingMoviesUseCase) :
     PagingSource<Int, MovieModel>() {
     override suspend fun load(params: LoadParams<Int>): LoadResult<Int, MovieModel> {
         return try {

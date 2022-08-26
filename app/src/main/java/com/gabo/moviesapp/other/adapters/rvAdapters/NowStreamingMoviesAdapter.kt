@@ -8,6 +8,7 @@ import android.view.ViewGroup
 import androidx.recyclerview.widget.RecyclerView
 import com.bumptech.glide.Glide
 import com.gabo.moviesapp.other.common.BASE_IMAGE_URL
+import com.gabo.moviesapp.other.common.setNowStreamingData
 
 class NowStreamingMoviesAdapter(private val click: (MovieModel) -> Unit): RecyclerView.Adapter<NowStreamingMoviesAdapter.NowStreamingMoviesVH>() {
     private var list: List<MovieModel> = emptyList()
@@ -21,13 +22,7 @@ class NowStreamingMoviesAdapter(private val click: (MovieModel) -> Unit): Recycl
     inner class NowStreamingMoviesVH(private val binding: NowStreamingMovieItemBinding): RecyclerView.ViewHolder(binding.root) {
 
         fun bind(model: MovieModel, click: (MovieModel) -> Unit){
-            with(binding) {
-                tvTitle.text = model.title
-                tvRating.text = model.Rating.toString()
-                Glide.with(ivPoster.context).load(BASE_IMAGE_URL + model.imageUrl)
-                    .into(ivPoster)
-                itemView.setOnClickListener { click(model) }
-            }
+           binding.setNowStreamingData(model,click)
         }
     }
 

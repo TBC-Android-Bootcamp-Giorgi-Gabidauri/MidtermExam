@@ -7,8 +7,6 @@ import androidx.paging.PagingConfig
 import androidx.paging.PagingData
 import androidx.paging.cachedIn
 import com.gabo.moviesapp.data.models.movieModels.MovieModel
-import com.gabo.moviesapp.data.models.movieModels.MoviesModel
-import com.gabo.moviesapp.data.paging.NowPlayingMoviesPagingSource
 import com.gabo.moviesapp.data.paging.PopularMoviesPagingSource
 import com.gabo.moviesapp.domain.usecases.GetNowPlayingMoviesUseCase
 import com.gabo.moviesapp.domain.usecases.GetPopularMoviesUseCase
@@ -24,7 +22,7 @@ class HomeViewModel(
     fun getPopularMovies(): Flow<PagingData<MovieModel>> {
         return Pager(
             config = PagingConfig(
-                pageSize = 20
+                pageSize = 5,
             ),
             pagingSourceFactory = {
                 PopularMoviesPagingSource(getPopularMoviesUseCase)
