@@ -4,7 +4,10 @@
     android:layout_width="wrap_content"
     android:background="@color/bg_gray"
     android:layout_height="wrap_content"
-    android:padding="@dimen/dimen_8dp">
+    android:paddingTop="@dimen/dimen_8dp"
+    android:paddingBottom="@dimen/dimen_8dp"
+    android:paddingStart="@dimen/dimen_0dp"
+    android:paddingEnd="@dimen/dimen_16dp">
 
     <ImageView
         android:id="@+id/ivPoster"

@@ -2,8 +2,10 @@
 <TextView xmlns:android="http://schemas.android.com/apk/res/android"
     android:layout_width="wrap_content"
     android:layout_height="wrap_content"
-    android:layout_margin="8dp"
-    android:textColor="@color/white"
+    android:layout_marginStart="@dimen/dimen_8dp"
+    android:layout_marginTop="@dimen/dimen_8dp"
+    android:layout_marginEnd="@dimen/dimen_16dp"
     android:background="@drawable/bg_genre"
     android:padding="8dp"
-    android:text="@string/horror" />
+    android:text="@string/horror"
+    android:textColor="@color/white" />
