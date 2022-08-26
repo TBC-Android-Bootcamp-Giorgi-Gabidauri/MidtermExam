@@ -11,7 +11,7 @@ android {
 
     defaultConfig {
         applicationId "com.gabo.moviesapp"
-        minSdk 22
+        minSdk 23
         targetSdk 32
         versionCode 1
         versionName "1.0"
@@ -60,7 +60,7 @@ dependencies {
 
     implementation 'androidx.activity:activity-ktx:1.5.1'
 
-    implementation 'org.jetbrains.kotlinx:kotlinx-coroutines-android:1.6.1'
+    implementation 'org.jetbrains.kotlinx:kotlinx-coroutines-android:1.6.4'
 
     def koin_version = "3.1.2"
     implementation "io.insert-koin:koin-android:$koin_version"
@@ -86,4 +86,7 @@ dependencies {
     implementation 'com.pierfrancescosoffritti.androidyoutubeplayer:core:11.1.0'
 
     implementation "androidx.viewpager2:viewpager2:1.0.0"
+
+    //SplashScreen
+    implementation 'androidx.core:core-splashscreen:1.0.0'
 }
