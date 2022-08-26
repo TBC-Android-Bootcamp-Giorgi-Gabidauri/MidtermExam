@@ -1,16 +1,17 @@
 package com.gabo.moviesapp.ui.loggedIn.home.movieDetails
 
 import android.os.Bundle
+import android.util.Log.d
 import androidx.navigation.fragment.findNavController
 import androidx.navigation.fragment.navArgs
 import androidx.recyclerview.widget.LinearLayoutManager
 import com.bumptech.glide.Glide
 import com.gabo.moviesapp.data.models.genreModels.GenreModel
 import com.gabo.moviesapp.data.models.movieTrailerModels.MovieTrailersModel
+import com.gabo.moviesapp.other.adapters.rvAdapters.SimilarMoviesAdapter
 import com.gabo.moviesapp.databinding.FragmentMovieDetailsBinding
 import com.gabo.moviesapp.ui.MainActivity
 import com.gabo.moviesapp.other.adapters.genresAdapter.GenresAdapter
-import com.gabo.moviesapp.other.adapters.rvAdapters.PopularMoviesAdapter
 import com.gabo.moviesapp.other.base.BaseFragment
 import com.gabo.moviesapp.other.common.BASE_IMAGE_URL
 import com.gabo.moviesapp.other.common.launchStarted
@@ -33,8 +34,8 @@ class MovieDetailsFragment : BaseFragment<MovieDetailsViewModel, FragmentMovieDe
             )
         }
     }
-    private val similarMoviesAdapter: PopularMoviesAdapter by lazy {
-        PopularMoviesAdapter {
+    private val similarMoviesAdapter: SimilarMoviesAdapter by lazy {
+        SimilarMoviesAdapter() {
             findNavController().navigate(
                 MovieDetailsFragmentDirections.actionMovieDetailsFragmentSelf(
                     it
@@ -55,7 +56,7 @@ class MovieDetailsFragment : BaseFragment<MovieDetailsViewModel, FragmentMovieDe
         setupObservers()
         setDetails()
         val genresList = (activity as MainActivity).genresList
-        similarMoviesAdapter.submitList(genresList)
+        similarMoviesAdapter.submitGenresList(genresList)
     }
 
     private fun setDetails() {
@@ -102,14 +103,16 @@ class MovieDetailsFragment : BaseFragment<MovieDetailsViewModel, FragmentMovieDe
             }
         }
         launchStarted(viewLifecycleOwner) {
-//            viewModel.getSimilarMovies(args.movieModel.id).collect {
-//                when(it){
-//                    is ResponseHandler.Success -> {
-//                        similarMoviesAdapter.submitData(it)
-//                    }
-//                    else -> {}
-//                }
-//            }
+            viewModel.getSimilarMovies(args.movieModel.id).collect {
+                when(it){
+                    is ResponseHandler.Success -> {
+                        similarMoviesAdapter.submitList(it.data?.movieResults)
+                    }
+                    is ResponseHandler.Error ->{
+                        d("ragacaeRori",it.errorMSg!!)
+                    }
+                }
+            }
 //            similarMoviesAdapter.loadStateFlow.collect { loadStates ->
 //                pfRetryState.isVisible = loadStates.refresh !is LoadState.Loading
 //            }

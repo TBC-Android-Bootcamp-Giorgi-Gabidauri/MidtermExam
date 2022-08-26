@@ -5,8 +5,9 @@ import com.gabo.moviesapp.data.repository.Repository
 import com.gabo.moviesapp.other.base.BaseUseCase
 import retrofit2.Response
 
-class GetSimilarMoviesUseCase(private val repository: Repository): BaseUseCase<Pair<Int,Int>,Response<MoviesModel>>() {
-    override suspend fun invoke(params: Pair<Int,Int>): Response<MoviesModel> {
-        return repository.getSimilarMovies(page = params.first, movieId = params.second)
+class GetSimilarMoviesUseCase(private val repository: Repository) :
+    BaseUseCase<Int, Response<MoviesModel>>() {
+    override suspend fun invoke(params: Int): Response<MoviesModel> {
+        return repository.getSimilarMovies(params)
     }
 }
