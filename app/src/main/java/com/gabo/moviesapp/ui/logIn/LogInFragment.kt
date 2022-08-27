@@ -10,8 +10,12 @@ class LogInFragment : BaseFragment<LogInViewModel, FragmentLogInBinding>(
     FragmentLogInBinding::inflate
 ) {
     override fun setupView(savedInstanceState: Bundle?) {
-        binding.tv.setOnClickListener {
-            findNavController().navigate(LogInFragmentDirections.actionLogInFragmentToViewPagerContainerFragment())
+//        binding.tv.setOnClickListener {
+//            findNavController().navigate(LogInFragmentDirections.actionLogInFragmentToViewPagerContainerFragment())
+//        }
+
+        binding.signUpLink.setOnClickListener {
+            findNavController().navigate(LogInFragmentDirections.actionLogInFragmentToRegisterFragment())
         }
     }
 
