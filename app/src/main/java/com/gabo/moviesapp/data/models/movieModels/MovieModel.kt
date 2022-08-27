@@ -7,7 +7,7 @@ import kotlinx.android.parcel.Parcelize
 @Parcelize
 data class MovieModel(
     @SerializedName("poster_path")
-    val imageUrl: String?,
+    var imageUrl: String?,
     @SerializedName("adult")
     val isAdultRated: Boolean,
     val overview: String,

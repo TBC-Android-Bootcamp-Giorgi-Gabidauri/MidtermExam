@@ -1,9 +1,201 @@
 <?xml version="1.0" encoding="utf-8"?>
-<FrameLayout xmlns:android="http://schemas.android.com/apk/res/android"
+<androidx.constraintlayout.widget.ConstraintLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
     xmlns:tools="http://schemas.android.com/tools"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
+    android:background="@color/appBackGround"
     tools:context=".ui.register.RegisterFragment">
 
+    <androidx.appcompat.widget.AppCompatImageView
+        android:id="@+id/ivBackButton"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_gravity="center"
+        android:layout_marginStart="20dp"
+        android:layout_marginTop="30dp"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toTopOf="parent"
+        app:srcCompat="@drawable/ic_back_button" />
 
-</FrameLayout>
+    <androidx.appcompat.widget.AppCompatTextView
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_gravity="center"
+        android:layout_margin="20dp"
+        android:text="@string/sign_up"
+        android:textColor="@color/white"
+        android:textSize="24sp"
+        app:layout_constraintStart_toEndOf="@id/ivBackButton"
+        app:layout_constraintTop_toTopOf="parent" />
+
+    <androidx.appcompat.widget.AppCompatTextView
+        android:id="@+id/tvOptions"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:layout_marginStart="23dp"
+        android:layout_marginTop="30dp"
+        android:text="@string/signUpInstruction"
+        android:textColor="#9C9C9C"
+        android:textSize="18sp"
+        app:layout_constraintTop_toBottomOf="@id/ivBackButton" />
+
+    <androidx.appcompat.widget.AppCompatImageView
+        android:id="@+id/ivFacebookOption"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_margin="30dp"
+        android:layout_marginEnd="20dp"
+        android:background="@drawable/ic_options_rectangle"
+        android:scaleType="center"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toBottomOf="@id/tvOptions"
+        app:srcCompat="@drawable/ic_facebook_logo" />
+
+    <androidx.appcompat.widget.AppCompatImageView
+        android:id="@+id/ivGoogleOption"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_margin="30dp"
+        android:layout_marginStart="20dp"
+        android:background="@drawable/ic_options_rectangle"
+        android:scaleType="center"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintTop_toBottomOf="@id/tvOptions"
+        app:srcCompat="@drawable/ic_google_logo" />
+
+    <com.google.android.material.textfield.TextInputLayout
+        android:id="@+id/tilUserNameLayout"
+        style="@style/Widget.MaterialComponents.TextInputLayout.FilledBox"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:layout_marginStart="20dp"
+        android:layout_marginEnd="20dp"
+        android:textColorHint="#9C9C9C"
+        app:boxStrokeColor="#FF722A"
+        app:boxStrokeWidth="@dimen/dimen_0dp"
+        app:hintTextColor="#FF722A"
+        app:layout_constraintBottom_toTopOf="@+id/btnRegister"
+        app:layout_constraintTop_toTopOf="parent"
+        app:startIconDrawable="@drawable/ic_person_icon"
+        app:startIconTint="#FF722A">
+
+        <com.google.android.material.textfield.TextInputEditText
+            android:id="@+id/etUserName"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:background="@drawable/ic_input_rectangle"
+            android:hint="@string/enter_username"
+            android:inputType="textEmailAddress" />
+
+    </com.google.android.material.textfield.TextInputLayout>
+
+    <com.google.android.material.textfield.TextInputLayout
+        android:id="@+id/tilEmailLayout"
+        style="@style/Widget.MaterialComponents.TextInputLayout.FilledBox"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:layout_marginStart="20dp"
+        android:layout_marginTop="20dp"
+        android:layout_marginEnd="20dp"
+        android:textColorHint="#9C9C9C"
+        app:boxStrokeColor="#FF722A"
+        app:boxStrokeWidth="@dimen/dimen_0dp"
+        app:hintTextColor="#FF722A"
+        app:layout_constraintTop_toBottomOf="@id/tilUserNameLayout"
+        app:startIconDrawable="@drawable/ic_email_book_icon"
+        app:startIconTint="#FF722A">
+
+        <com.google.android.material.textfield.TextInputEditText
+            android:id="@+id/etEmail"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:background="@drawable/ic_input_rectangle"
+            android:hint="@string/enter_your_email"
+            android:inputType="textEmailAddress" />
+
+    </com.google.android.material.textfield.TextInputLayout>
+
+    <com.google.android.material.textfield.TextInputLayout
+        android:id="@+id/tilPasswordLayout"
+        style="@style/Widget.MaterialComponents.TextInputLayout.FilledBox"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:layout_marginStart="20dp"
+        android:layout_marginTop="15dp"
+        android:layout_marginEnd="20dp"
+        android:textColorHint="#9C9C9C"
+        app:boxStrokeColor="#FF722A"
+        app:boxStrokeWidth="@dimen/dimen_0dp"
+        app:hintTextColor="#FF722A"
+        app:layout_constraintTop_toBottomOf="@id/tilEmailLayout"
+        app:passwordToggleDrawable="@drawable/ic_show_pass_icon"
+        app:passwordToggleEnabled="true"
+        app:passwordToggleTint="#FF722A"
+        app:startIconDrawable="@drawable/ic_lock_icon"
+        app:startIconTint="#FF722A">
+
+        <com.google.android.material.textfield.TextInputEditText
+            android:id="@+id/etPassword"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:background="@drawable/ic_input_rectangle"
+            android:hint="@string/enter_your_password"
+            android:inputType="textPassword" />
+
+    </com.google.android.material.textfield.TextInputLayout>
+
+    <com.google.android.material.textfield.TextInputLayout
+        android:id="@+id/tilRepeatPassLayout"
+        style="@style/Widget.MaterialComponents.TextInputLayout.FilledBox"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:layout_marginStart="20dp"
+        android:layout_marginTop="15dp"
+        android:layout_marginEnd="20dp"
+        android:textColorHint="#9C9C9C"
+        app:boxStrokeColor="#FF722A"
+        app:boxStrokeWidth="@dimen/dimen_0dp"
+        app:hintTextColor="#FF722A"
+        app:layout_constraintTop_toBottomOf="@id/tilPasswordLayout"
+        app:passwordToggleDrawable="@drawable/ic_show_pass_icon"
+        app:passwordToggleEnabled="true"
+        app:passwordToggleTint="#FF722A"
+        app:startIconDrawable="@drawable/ic_lock_icon"
+        app:startIconTint="#FF722A">
+
+        <com.google.android.material.textfield.TextInputEditText
+            android:id="@+id/etRepeatPassword"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:background="@drawable/ic_input_rectangle"
+            android:hint="@string/repeat_password"
+            android:inputType="textPassword" />
+
+    </com.google.android.material.textfield.TextInputLayout>
+
+    <androidx.appcompat.widget.AppCompatButton
+        android:id="@+id/btnRegister"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:layout_margin="20dp"
+        android:background="@drawable/ic_button_background"
+        android:gravity="center"
+        android:text="@string/create_account"
+        android:textColor="@color/white"
+        android:textSize="20sp"
+        app:layout_constraintBottom_toTopOf="@id/logInLink" />
+
+    <androidx.appcompat.widget.AppCompatTextView
+        android:id="@+id/logInLink"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:layout_marginTop="30dp"
+        android:layout_marginBottom="30dp"
+        android:gravity="center"
+        android:text="@string/already_have_an_account_login"
+        android:textColor="#9C9C9C"
+        android:textSize="18sp"
+        app:layout_constraintBottom_toBottomOf="parent" />
+
+</androidx.constraintlayout.widget.ConstraintLayout>
