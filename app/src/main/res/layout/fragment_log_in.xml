@@ -23,7 +23,6 @@
         android:layout_height="wrap_content"
         android:layout_gravity="center"
         android:layout_margin="20dp"
-        android:fontFamily="@font/roboto_medium"
         android:text="@string/login"
         android:textColor="@color/white"
         android:textSize="24sp"
@@ -89,6 +88,7 @@
             android:layout_height="wrap_content"
             android:background="@drawable/ic_input_rectangle"
             android:hint="@string/enter_your_email"
+            android:textColor=""
             android:inputType="textEmailAddress" />
 
     </com.google.android.material.textfield.TextInputLayout>

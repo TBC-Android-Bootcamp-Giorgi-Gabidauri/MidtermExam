@@ -23,7 +23,6 @@
         android:layout_height="wrap_content"
         android:layout_gravity="center"
         android:layout_margin="20dp"
-        android:fontFamily="@font/roboto_medium"
         android:text="@string/sign_up"
         android:textColor="@color/white"
         android:textSize="24sp"
