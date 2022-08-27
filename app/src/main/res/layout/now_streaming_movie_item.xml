@@ -11,8 +11,10 @@
 
     <ImageView
         android:id="@+id/ivPoster"
-        android:layout_width="120dp"
+        android:layout_width="110dp"
         android:layout_height="wrap_content"
+        android:scaleType="fitCenter"
+        android:adjustViewBounds="true"
         android:src="@drawable/ic_launcher_background"
         app:layout_constraintBottom_toBottomOf="@+id/glPoster"
         app:layout_constraintEnd_toEndOf="parent"

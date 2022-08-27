@@ -1,0 +1,39 @@
+{
+  "project_info": {
+    "project_number": "1036499733155",
+    "project_id": "movies-app-91a96",
+    "storage_bucket": "movies-app-91a96.appspot.com"
+  },
+  "client": [
+    {
+      "client_info": {
+        "mobilesdk_app_id": "1:1036499733155:android:7f2398c3506e8265c30d16",
+        "android_client_info": {
+          "package_name": "com.gabo.moviesapp"
+        }
+      },
+      "oauth_client": [
+        {
+          "client_id": "1036499733155-a8rftun4u7bcfk7kkb8bp0bbu6as465i.apps.googleusercontent.com",
+          "client_type": 3
+        }
+      ],
+      "api_key": [
+        {
+          "current_key": "AIzaSyD4TXMto_dtJVTCGOvsr3YRNzom-C77bLU"
+        }
+      ],
+      "services": {
+        "appinvite_service": {
+          "other_platform_oauth_client": [
+            {
+              "client_id": "1036499733155-a8rftun4u7bcfk7kkb8bp0bbu6as465i.apps.googleusercontent.com",
+              "client_type": 3
+            }
+          ]
+        }
+      }
+    }
+  ],
+  "configuration_version": "1"
+}

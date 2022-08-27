@@ -54,8 +54,15 @@ import com.gabo.moviesapp.other.adapters.genresAdapter.GenresAdapter
 import com.gabo.moviesapp.other.common.BASE_IMAGE_URL
 
 class SimilarMoviesAdapter(private val click: (MovieModel) -> Unit) :
-    ListAdapter<MovieModel, SimilarMoviesAdapter.SimilarMoviesVH>(MovieDiffCallback()) {
+    RecyclerView.Adapter<SimilarMoviesAdapter.SimilarMoviesVH>() {
     private var genresList: List<GenreModel> = emptyList()
+    private var list: List<MovieModel> = emptyList()
+
+    @SuppressLint("NotifyDataSetChanged")
+    fun submitList(list: List<MovieModel>) {
+        this.list = list
+        notifyDataSetChanged()
+    }
 
     @SuppressLint("NotifyDataSetChanged")
     fun submitGenresList(list: List<GenreModel>) {
@@ -100,8 +107,10 @@ class SimilarMoviesAdapter(private val click: (MovieModel) -> Unit) :
     }
 
     override fun onBindViewHolder(holder: SimilarMoviesVH, position: Int) {
-        val item = getItem(position)
+        val item = list[position]
         holder.bind(item, click)
     }
+
+    override fun getItemCount() = list.size
 
 }

@@ -7,7 +7,7 @@ import androidx.paging.PagingConfig
 import androidx.paging.PagingData
 import androidx.paging.cachedIn
 import com.gabo.moviesapp.data.models.movieModels.MovieModel
-import com.gabo.moviesapp.data.paging.NowPlayingMoviesPagingSource
+import com.gabo.moviesapp.data.paging.NowStreamingMoviesPagingSource
 import com.gabo.moviesapp.domain.usecases.GetNowPlayingMoviesUseCase
 import kotlinx.coroutines.flow.Flow
 
@@ -19,7 +19,7 @@ class SeeMoreNowStreamingViewModel(private val getNowPlayingMoviesUseCase: GetNo
                 pageSize = 20
             ),
             pagingSourceFactory = {
-                NowPlayingMoviesPagingSource(getNowPlayingMoviesUseCase)
+                NowStreamingMoviesPagingSource(getNowPlayingMoviesUseCase)
             }
         ).flow.cachedIn(viewModelScope)
     }
