@@ -3,11 +3,18 @@
   <component name="DesignSurface">
     <option name="filePathToZoomLevelMap">
       <map>
-        <entry key="..\:/Users/giorg/AndroidStudioProjects/MoviesApp/app/src/main/res/drawable/bg_detail_divider.xml" value="0.151" />
+        <entry key="..\:/Users/User/AndroidStudioProjects/MidtermExam/app/src/main/res/drawable/ic_app_logo.xml" value="0.135" />
+        <entry key="..\:/Users/User/AndroidStudioProjects/MidtermExam/app/src/main/res/drawable/ic_button_background.xml" value="0.124" />
+        <entry key="..\:/Users/User/AndroidStudioProjects/MidtermExam/app/src/main/res/drawable/ic_email_book_icon.xml" value="0.124" />
+        <entry key="..\:/Users/User/AndroidStudioProjects/MidtermExam/app/src/main/res/drawable/ic_input_rectangle.xml" value="0.124" />
+        <entry key="..\:/Users/User/AndroidStudioProjects/MidtermExam/app/src/main/res/drawable/splash_screen.xml" value="0.135" />
+        <entry key="..\:/Users/User/AndroidStudioProjects/MidtermExam/app/src/main/res/layout/fragment_home.xml" value="0.19166666666666668" />
+        <entry key="..\:/Users/User/AndroidStudioProjects/MidtermExam/app/src/main/res/layout/fragment_log_in.xml" value="0.264" />
+        <entry key="..\:/Users/User/AndroidStudioProjects/MidtermExam/app/src/main/res/layout/fragment_register.xml" value="0.264" />
+        <entry key="..\:/Users/User/AndroidStudioProjects/MidtermExam/app/src/main/res/menu/bottom_nav_menu.xml" value="0.1" />
         <entry key="..\:/Users/giorg/AndroidStudioProjects/MoviesApp/app/src/main/res/drawable/bg_genre.xml" value="0.151" />
         <entry key="..\:/Users/giorg/AndroidStudioProjects/MoviesApp/app/src/main/res/drawable/ic_star.xml" value="0.221" />
         <entry key="..\:/Users/giorg/AndroidStudioProjects/MoviesApp/app/src/main/res/layout/activity_main.xml" value="0.22447916666666667" />
-        <entry key="..\:/Users/giorg/AndroidStudioProjects/MoviesApp/app/src/main/res/layout/fragment_favourites.xml" value="0.22447916666666667" />
         <entry key="..\:/Users/giorg/AndroidStudioProjects/MoviesApp/app/src/main/res/layout/fragment_home.xml" value="0.22447916666666667" />
         <entry key="..\:/Users/giorg/AndroidStudioProjects/MoviesApp/app/src/main/res/layout/fragment_log_in.xml" value="0.22447916666666667" />
         <entry key="..\:/Users/giorg/AndroidStudioProjects/MoviesApp/app/src/main/res/layout/fragment_logged_in.xml" value="0.22447916666666667" />
@@ -24,7 +31,6 @@
         <entry key="..\:/Users/giorg/AndroidStudioProjects/MoviesApp/app/src/main/res/layout/loading_item.xml" value="0.22447916666666667" />
         <entry key="..\:/Users/giorg/AndroidStudioProjects/MoviesApp/app/src/main/res/layout/movie_item.xml" value="0.22447916666666667" />
         <entry key="..\:/Users/giorg/AndroidStudioProjects/MoviesApp/app/src/main/res/layout/now_playing_movie_item.xml" value="0.67" />
-        <entry key="..\:/Users/giorg/AndroidStudioProjects/MoviesApp/app/src/main/res/layout/now_streaming_movie_item.xml" value="0.22447916666666667" />
         <entry key="..\:/Users/giorg/AndroidStudioProjects/MoviesApp/app/src/main/res/layout/popular_movie_item.xml" value="0.22447916666666667" />
         <entry key="..\:/Users/giorg/AndroidStudioProjects/MoviesApp/app/src/main/res/layout/trailer_item.xml" value="0.22447916666666667" />
         <entry key="..\:/Users/giorg/AndroidStudioProjects/MoviesApp/app/src/main/res/menu/bottom_nav_menu.xml" value="0.22447916666666667" />
