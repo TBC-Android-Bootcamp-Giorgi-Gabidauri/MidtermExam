@@ -36,7 +36,8 @@
             app:destination="@id/movieDetailsFragment" />
         <argument
             android:name="movieModel"
-            app:argType="com.gabo.moviesapp.data.models.movieModels.MovieModel" />
+            app:argType="com.gabo.moviesapp.data.models.movieModels.MovieModel"
+            app:nullable="true" />
     </fragment>
     <fragment
         android:id="@+id/viewPagerContainerFragment"

@@ -16,6 +16,8 @@
         <entry key="..\:/Users/giorg/AndroidStudioProjects/MoviesApp/app/src/main/res/layout/fragment_register.xml" value="0.22447916666666667" />
         <entry key="..\:/Users/giorg/AndroidStudioProjects/MoviesApp/app/src/main/res/layout/fragment_search.xml" value="0.22447916666666667" />
         <entry key="..\:/Users/giorg/AndroidStudioProjects/MoviesApp/app/src/main/res/layout/fragment_see_more_now_streaming.xml" value="0.22447916666666667" />
+        <entry key="..\:/Users/giorg/AndroidStudioProjects/MoviesApp/app/src/main/res/layout/fragment_similar_movies.xml" value="0.22447916666666667" />
+        <entry key="..\:/Users/giorg/AndroidStudioProjects/MoviesApp/app/src/main/res/layout/fragment_trailers.xml" value="0.22447916666666667" />
         <entry key="..\:/Users/giorg/AndroidStudioProjects/MoviesApp/app/src/main/res/layout/fragment_view_pager_container.xml" value="0.22447916666666667" />
         <entry key="..\:/Users/giorg/AndroidStudioProjects/MoviesApp/app/src/main/res/layout/genre_ite.xml" value="0.22447916666666667" />
         <entry key="..\:/Users/giorg/AndroidStudioProjects/MoviesApp/app/src/main/res/layout/genre_item.xml" value="0.22447916666666667" />
@@ -24,6 +26,7 @@
         <entry key="..\:/Users/giorg/AndroidStudioProjects/MoviesApp/app/src/main/res/layout/now_playing_movie_item.xml" value="0.67" />
         <entry key="..\:/Users/giorg/AndroidStudioProjects/MoviesApp/app/src/main/res/layout/now_streaming_movie_item.xml" value="0.22447916666666667" />
         <entry key="..\:/Users/giorg/AndroidStudioProjects/MoviesApp/app/src/main/res/layout/popular_movie_item.xml" value="0.22447916666666667" />
+        <entry key="..\:/Users/giorg/AndroidStudioProjects/MoviesApp/app/src/main/res/layout/trailer_item.xml" value="0.22447916666666667" />
         <entry key="..\:/Users/giorg/AndroidStudioProjects/MoviesApp/app/src/main/res/menu/bottom_nav_menu.xml" value="0.22447916666666667" />
       </map>
     </option>
