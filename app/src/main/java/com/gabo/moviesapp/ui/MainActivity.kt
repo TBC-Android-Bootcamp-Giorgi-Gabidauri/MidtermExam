@@ -6,9 +6,15 @@ import androidx.core.splashscreen.SplashScreen.Companion.installSplashScreen
 import androidx.lifecycle.Lifecycle
 import androidx.lifecycle.lifecycleScope
 import androidx.lifecycle.repeatOnLifecycle
+import androidx.navigation.Navigation
+import androidx.navigation.findNavController
+import com.gabo.moviesapp.R
 import com.gabo.moviesapp.data.models.genreModels.GenreModel
 import com.gabo.moviesapp.databinding.ActivityMainBinding
 import com.gabo.moviesapp.other.responseHelpers.ResponseHandler
+import com.google.firebase.auth.FirebaseAuth
+import com.google.firebase.auth.ktx.auth
+import com.google.firebase.ktx.Firebase
 import kotlinx.coroutines.launch
 import org.koin.androidx.viewmodel.ext.android.viewModel
 

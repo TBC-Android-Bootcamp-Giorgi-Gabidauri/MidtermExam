@@ -19,4 +19,15 @@
     <string name="similar_movies">Similar Movies</string>
     <string name="see_more">See more</string>
     <string name="divider">Divider</string>
+    <string name="already_have_an_account_login">Already have an account? <font color="#FFFFFFFF">Log in</font></string>
+    <string name="don_t_have_an_account_sign_up">Don’t have an account? <font color="#FFFFFFFF">Sign up</font></string>
+    <string name="login">Login</string>
+    <string name="loginInstruction">Log in with one of following options</string>
+    <string name="enter_your_email">Enter your email</string>
+    <string name="enter_your_password">Enter your password</string>
+    <string name="sign_up">Sign up</string>
+    <string name="signUpInstruction">Sign up with one of following options</string>
+    <string name="enter_username">Enter username</string>
+    <string name="repeat_password">Repeat password</string>
+    <string name="create_account">Create Account</string>
 </resources>

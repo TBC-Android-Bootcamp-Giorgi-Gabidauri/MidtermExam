@@ -10,4 +10,5 @@
     <color name="bg_gray">#302F32</color>
     <color name="txt_gray">#9C9C9C</color>
     <color name="bg_genre_item">#FF722A</color>
+    <color name="appBackGround">#302F32</color>
 </resources>
