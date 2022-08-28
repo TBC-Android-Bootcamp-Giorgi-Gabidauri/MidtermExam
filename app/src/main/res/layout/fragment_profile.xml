@@ -35,9 +35,9 @@
             android:id="@+id/tvUsername"
             android:layout_width="0dp"
             android:layout_height="wrap_content"
+            android:layout_marginStart="@dimen/dimen_8dp"
+            android:layout_marginEnd="@dimen/dimen_8dp"
             android:layout_marginTop="20dp"
-            android:paddingStart="@dimen/dimen_8dp"
-            android:paddingEnd="@dimen/dimen_0dp"
             android:text="@string/username"
             android:textColor="@color/txt_gray"
             android:textSize="30sp"
@@ -47,32 +47,42 @@
 
         <androidx.appcompat.widget.AppCompatTextView
             android:id="@+id/tvUserEmail"
-            android:layout_width="match_parent"
+            android:layout_width="0dp"
             android:layout_height="wrap_content"
-            android:gravity="center"
             android:text="@string/email"
-            android:textColor="#9C9C9C"
-            android:textSize="22sp"
+            android:layout_marginEnd="@dimen/dimen_8dp"
+            android:textColor="@color/txt_gray"
+            android:textSize="@dimen/dimen_22sp"
+            app:layout_constraintEnd_toEndOf="parent"
+            app:layout_constraintStart_toStartOf="@id/tvUsername"
             app:layout_constraintTop_toBottomOf="@id/tvUsername" />
+
+        <com.google.android.material.divider.MaterialDivider
+            android:layout_width="match_parent"
+            android:layout_height="@dimen/dimen_2dp"
+            android:layout_marginStart="@dimen/dimen_16dp"
+            android:layout_marginTop="@dimen/dimen_8dp"
+            android:layout_marginEnd="@dimen/dimen_16dp"
+            app:layout_constraintTop_toBottomOf="@id/ivUserImage" />
 
         <androidx.appcompat.widget.AppCompatTextView
             android:id="@+id/tvSavedMovies"
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
-            android:layout_marginTop="10dp"
+            android:layout_marginTop="15dp"
             android:gravity="center"
             android:text="@string/saved_movies"
-            android:textSize="20sp"
             android:textColor="@color/white"
+            android:textSize="20sp"
             app:layout_constraintTop_toBottomOf="@id/ivUserImage" />
 
         <com.google.android.material.divider.MaterialDivider
             android:layout_width="match_parent"
-            android:layout_marginStart="@dimen/dimen_16dp"
-            android:layout_marginEnd="@dimen/dimen_16dp"
             android:layout_height="@dimen/dimen_2dp"
-            app:layout_constraintTop_toBottomOf="@id/tvSavedMovies"
-            android:layout_marginTop="@dimen/dimen_8dp"/>
+            android:layout_marginStart="@dimen/dimen_16dp"
+            android:layout_marginTop="@dimen/dimen_8dp"
+            android:layout_marginEnd="@dimen/dimen_16dp"
+            app:layout_constraintTop_toBottomOf="@id/tvSavedMovies" />
 
         <androidx.recyclerview.widget.RecyclerView
             android:id="@+id/rvSavedMovies"

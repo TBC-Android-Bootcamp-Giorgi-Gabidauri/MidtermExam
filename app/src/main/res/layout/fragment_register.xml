@@ -14,10 +14,19 @@
         android:layout_gravity="center"
         android:layout_margin="20dp"
         android:text="@string/sign_up"
-        android:textColor="@color/white"
+        android:textColor="#FF722A"
         android:textSize="24sp"
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toTopOf="parent" />
+
+    <androidx.appcompat.widget.AppCompatImageView
+        android:layout_width="100dp"
+        android:layout_height="100dp"
+        app:srcCompat="@drawable/ic_app_logo_for_pages"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintTop_toBottomOf="@id/tvSignUpHeader"
+        app:layout_constraintBottom_toTopOf="@id/tilUserNameLayout"/>
 
     <com.google.android.material.textfield.TextInputLayout
         android:id="@+id/tilUserNameLayout"
@@ -32,7 +41,7 @@
         app:boxStrokeWidth="@dimen/dimen_0dp"
         app:hintTextColor="#FF722A"
         app:layout_constraintBottom_toTopOf="@+id/btnRegister"
-        app:layout_constraintTop_toTopOf="parent"
+        app:layout_constraintTop_toBottomOf="@id/tvSignUpHeader"
         app:startIconDrawable="@drawable/ic_person_icon"
         app:startIconTint="#FF722A">
 
@@ -42,7 +51,7 @@
             android:layout_height="wrap_content"
             android:background="@drawable/ic_input_rectangle"
             android:hint="@string/enter_username"
-            android:textColor="#9C9C9C"
+            android:textColor="@color/white"
             android:inputType="textEmailAddress" />
 
     </com.google.android.material.textfield.TextInputLayout>
@@ -69,7 +78,7 @@
             android:layout_height="wrap_content"
             android:background="@drawable/ic_input_rectangle"
             android:hint="@string/enter_your_email"
-            android:textColor="#9C9C9C"
+            android:textColor="@color/white"
             android:inputType="textEmailAddress" />
 
     </com.google.android.material.textfield.TextInputLayout>
@@ -99,7 +108,7 @@
             android:layout_height="wrap_content"
             android:background="@drawable/ic_input_rectangle"
             android:hint="@string/enter_your_password"
-            android:textColor="#9C9C9C"
+            android:textColor="@color/white"
             android:inputType="textPassword" />
 
     </com.google.android.material.textfield.TextInputLayout>
@@ -129,7 +138,7 @@
             android:layout_height="wrap_content"
             android:background="@drawable/ic_input_rectangle"
             android:hint="@string/repeat_password"
-            android:textColor="#9C9C9C"
+            android:textColor="@color/white"
             android:inputType="textPassword" />
 
     </com.google.android.material.textfield.TextInputLayout>

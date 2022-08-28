@@ -12,7 +12,7 @@ android {
 
     defaultConfig {
         applicationId "com.gabo.moviesapp"
-        minSdk 23
+        minSdk 24
         targetSdk 32
         versionCode 1
         versionName "1.0"
@@ -91,4 +91,10 @@ dependencies {
     implementation "androidx.viewpager2:viewpager2:1.0.0"
 
     implementation 'androidx.core:core-splashscreen:1.0.0'
+
+    def room_version = '2.4.3'
+    implementation "androidx.room:room-runtime:$room_version"
+    implementation "androidx.room:room-ktx:$room_version"
+    kapt "androidx.room:room-compiler:$room_version"
+
 }

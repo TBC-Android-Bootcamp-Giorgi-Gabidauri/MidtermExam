@@ -2,11 +2,13 @@ package com.gabo.moviesapp.ui.loggedIn.home.movieDetails
 
 import android.os.Bundle
 import android.util.Log.d
+import android.widget.Toast
 import androidx.fragment.app.activityViewModels
 import androidx.navigation.fragment.findNavController
 import androidx.navigation.fragment.navArgs
 import androidx.recyclerview.widget.LinearLayoutManager
 import androidx.viewpager2.widget.ViewPager2
+import com.gabo.moviesapp.R
 import com.gabo.moviesapp.data.models.genreModels.GenreModel
 import com.gabo.moviesapp.data.models.movieModels.MovieModel
 import com.gabo.moviesapp.data.models.movieTrailerModels.MovieTrailersModel
@@ -28,6 +30,7 @@ import com.pierfrancescosoffritti.androidyoutubeplayer.core.player.YouTubePlayer
 import com.pierfrancescosoffritti.androidyoutubeplayer.core.player.listeners.AbstractYouTubePlayerListener
 import com.pierfrancescosoffritti.androidyoutubeplayer.core.player.views.YouTubePlayerView
 import kotlinx.android.synthetic.main.fragment_view_pager_container.*
+import kotlinx.android.synthetic.main.popular_movie_item.*
 
 class MovieDetailsFragment : BaseFragment<MovieDetailsViewModel, FragmentMovieDetailsBinding>(
     MovieDetailsViewModel::class,
@@ -35,22 +38,43 @@ class MovieDetailsFragment : BaseFragment<MovieDetailsViewModel, FragmentMovieDe
 ) {
     private val args: MovieDetailsFragmentArgs by navArgs()
     private val activityViewModel: MainViewModel by activityViewModels()
-
+    private lateinit var movieModel: MovieModel
     override fun setupView(savedInstanceState: Bundle?) {
         setDetails()
         setupTabLayout()
-        listeners()
+        setupClickListeners()
     }
 
-    private fun listeners(){
-        binding.ivBackButton.setOnClickListener {
-            findNavController().popBackStack()
+    private fun setupClickListeners(){
+        with(binding){
+            ivSaveMovie.setOnClickListener {
+                saveStateControl()
+            }
+
+            ivBackButton.setOnClickListener {
+                findNavController().popBackStack()
+            }
+
+        }
+    }
+
+    private fun saveStateControl() {
+        if (movieModel.isSaved == true){
+            movieModel.isSaved = false
+            activityViewModel.deleteMovie(movieModel.id)
+            ivSaveMovie.setImageResource(R.drawable.ic_save_item)
+            Toast.makeText(requireContext(), "Removed", Toast.LENGTH_SHORT).show()
+        } else{
+            movieModel.isSaved = true
+            activityViewModel.saveMovie(movieModel)
+            ivSaveMovie.setImageResource(R.drawable.ic_save_item_filled)
+            Toast.makeText(requireContext(), "Saved", Toast.LENGTH_SHORT).show()
         }
     }
 
     private fun setDetails() {
         activityViewModel.movieDetailsFragmentArgs.value = args.movieModel?.id ?: 0
-        val movieModel = args.movieModel!!
+        movieModel = args.movieModel!!
         val genresToFilter = (activity as MainActivity).genresList
         with(binding) {
             ivPoster.loadImage(movieModel.backdropPath)
@@ -58,6 +82,11 @@ class MovieDetailsFragment : BaseFragment<MovieDetailsViewModel, FragmentMovieDe
             tvTitle.text = movieModel.title
             tvRating.text = movieModel.Rating.toString()
             rvGenres.setupGenres(genresToFilter, movieModel)
+            if (movieModel.isSaved == true){
+                ivSaveMovie.setImageResource(R.drawable.ic_save_item_filled)
+            } else{
+                ivSaveMovie.setImageResource(R.drawable.ic_save_item)
+            }
         }
     }
 

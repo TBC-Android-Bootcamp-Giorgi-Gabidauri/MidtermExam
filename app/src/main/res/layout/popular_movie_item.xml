@@ -12,9 +12,9 @@
         android:id="@+id/ivPoster"
         android:layout_width="0dp"
         android:layout_height="wrap_content"
+        android:adjustViewBounds="true"
         android:contentDescription="@string/poster"
         android:scaleType="fitCenter"
-        android:adjustViewBounds="true"
         android:src="@drawable/ic_launcher_background"
         app:layout_constraintBottom_toBottomOf="parent"
         app:layout_constraintEnd_toEndOf="@id/glPoster"
@@ -31,7 +31,7 @@
         android:textColor="@color/white"
         android:textSize="20sp"
         app:layout_constraintBottom_toTopOf="@id/tvRating"
-        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintEnd_toStartOf="@id/ivSaveMovie"
         app:layout_constraintStart_toEndOf="@id/glPoster"
         app:layout_constraintTop_toTopOf="parent"
         app:layout_goneMarginStart="@dimen/dimen_8dp" />
@@ -41,9 +41,9 @@
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:layout_marginStart="8dp"
+        android:contentDescription="@string/star"
         android:paddingStart="@dimen/dimen_8dp"
         android:paddingEnd="@dimen/dimen_0dp"
-        android:contentDescription="@string/star"
         android:src="@drawable/ic_star"
         app:layout_constraintBottom_toTopOf="@id/rvGenres"
         app:layout_constraintEnd_toStartOf="@id/tvRating"
@@ -77,6 +77,17 @@
         app:layout_constraintStart_toEndOf="@id/glPoster"
         app:layout_constraintTop_toBottomOf="@id/tvRating"
         tools:listitem="@layout/genre_item" />
+
+    <androidx.appcompat.widget.AppCompatImageView
+        android:id="@+id/ivSaveMovie"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_marginStart="@dimen/dimen_16dp"
+        android:layout_marginEnd="@dimen/dimen_16dp"
+        android:src="@drawable/ic_save_item"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintStart_toEndOf="@id/tvTitle"
+        app:layout_constraintTop_toTopOf="parent" />
 
     <androidx.constraintlayout.widget.Guideline
         android:id="@+id/glPoster"

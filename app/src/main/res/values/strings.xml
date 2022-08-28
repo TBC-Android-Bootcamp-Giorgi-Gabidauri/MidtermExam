@@ -19,8 +19,8 @@
     <string name="similar_movies">Similar Movies</string>
     <string name="see_more">See more</string>
     <string name="divider">Divider</string>
-    <string name="already_have_an_account_login">Already have an account? <font color="#FFFFFFFF">Log in</font></string>
-    <string name="don_t_have_an_account_sign_up">Don’t have an account? <font color="#FFFFFFFF">Sign up</font></string>
+    <string name="already_have_an_account_login">Already have an account? <font color="#FF722A">Log in</font></string>
+    <string name="don_t_have_an_account_sign_up">Don’t have an account? <font color="#FF722A">Sign up</font></string>
     <string name="login">Login</string>
     <string name="loginInstruction">Log in with one of following options</string>
     <string name="enter_your_email">Enter your email</string>
@@ -35,4 +35,5 @@
     <string name="saved_movies">Saved Movies</string>
     <string name="username">username</string>
     <string name="email">email</string>
+    <string name="fragment_movies_no_please_connect_to_a_network_text">fragment_movies_no_please_connect_to_a_network_text</string>
 </resources>
