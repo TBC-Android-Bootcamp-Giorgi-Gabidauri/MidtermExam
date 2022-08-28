@@ -7,18 +7,8 @@
     android:background="@color/appBackGround"
     tools:context=".ui.logIn.LogInFragment">
 
-    <androidx.appcompat.widget.AppCompatImageView
-        android:id="@+id/ivBackButton"
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        android:layout_gravity="center"
-        android:layout_marginStart="20dp"
-        android:layout_marginTop="30dp"
-        app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toTopOf="parent"
-        app:srcCompat="@drawable/ic_back_button" />
-
     <androidx.appcompat.widget.AppCompatTextView
+        android:id="@+id/tvLoginHeader"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:layout_gravity="center"
@@ -26,44 +16,8 @@
         android:text="@string/login"
         android:textColor="@color/white"
         android:textSize="24sp"
-        app:layout_constraintStart_toEndOf="@id/ivBackButton"
-        app:layout_constraintTop_toTopOf="parent" />
-
-    <androidx.appcompat.widget.AppCompatTextView
-        android:id="@+id/tvOptions"
-        android:layout_width="match_parent"
-        android:layout_height="wrap_content"
-        android:layout_marginStart="20dp"
-        android:layout_marginTop="30dp"
-        android:layout_marginEnd="20dp"
-        android:text="@string/loginInstruction"
-        android:textColor="#9C9C9C"
-        android:textSize="18sp"
-        app:layout_constraintTop_toBottomOf="@id/ivBackButton" />
-
-    <androidx.appcompat.widget.AppCompatImageView
-        android:id="@+id/ivFacebookOption"
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        android:layout_margin="30dp"
-        android:layout_marginEnd="20dp"
-        android:background="@drawable/ic_options_rectangle"
-        android:scaleType="center"
         app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toBottomOf="@id/tvOptions"
-        app:srcCompat="@drawable/ic_facebook_logo" />
-
-    <androidx.appcompat.widget.AppCompatImageView
-        android:id="@+id/ivGoogleOption"
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        android:layout_margin="30dp"
-        android:layout_marginStart="20dp"
-        android:background="@drawable/ic_options_rectangle"
-        android:scaleType="center"
-        app:layout_constraintEnd_toEndOf="parent"
-        app:layout_constraintTop_toBottomOf="@id/tvOptions"
-        app:srcCompat="@drawable/ic_google_logo" />
+        app:layout_constraintTop_toTopOf="parent" />
 
     <com.google.android.material.textfield.TextInputLayout
         android:id="@+id/tilEmailLayout"
@@ -77,7 +31,7 @@
         app:boxStrokeWidth="@dimen/dimen_0dp"
         app:hintTextColor="#FF722A"
         app:layout_constraintBottom_toTopOf="@+id/btnLogin"
-        app:layout_constraintTop_toBottomOf="@id/tvOptions"
+        app:layout_constraintTop_toBottomOf="@id/tvLoginHeader"
         app:startIconDrawable="@drawable/ic_email_book_icon"
         app:startIconTint="#FF722A"
         tools:layout_editor_absoluteX="20dp">
@@ -88,7 +42,7 @@
             android:layout_height="wrap_content"
             android:background="@drawable/ic_input_rectangle"
             android:hint="@string/enter_your_email"
-            android:textColor=""
+            android:textColor="#9C9C9C"
             android:inputType="textEmailAddress" />
 
     </com.google.android.material.textfield.TextInputLayout>
@@ -115,6 +69,7 @@
             android:layout_height="wrap_content"
             android:background="@drawable/ic_input_rectangle"
             android:hint="@string/enter_your_password"
+            android:textColor="#9C9C9C"
             android:inputType="textPassword" />
 
     </com.google.android.material.textfield.TextInputLayout>

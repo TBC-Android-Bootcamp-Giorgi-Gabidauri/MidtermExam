@@ -14,18 +14,20 @@ class LogInFragment : BaseFragment<LogInViewModel, FragmentLogInBinding>(
     LogInViewModel::class,
     FragmentLogInBinding::inflate
 ) {
+
     override fun setupView(savedInstanceState: Bundle?) {
         checkSession()
         listeners()
     }
 
-    private fun checkSession(){
+    private fun checkSession() {
         FirebaseAuth.getInstance().currentUser?.uid?.let {
             findNavController().navigate(LogInFragmentDirections.actionLogInFragmentToViewPagerContainerFragment())
         }
     }
 
-    private fun listeners(){
+    private fun listeners() {
+
         binding.btnLogin.setOnClickListener {
             login(
                 binding.etEmail.text.toString().trim(),
@@ -46,7 +48,7 @@ class LogInFragment : BaseFragment<LogInViewModel, FragmentLogInBinding>(
                 email,
                 password
             ).addOnCompleteListener {
-                if (it.isSuccessful){
+                if (it.isSuccessful) {
                     Toast.makeText(requireContext(), "Logged in successfully", Toast.LENGTH_SHORT)
                         .show()
                     findNavController().navigate(LogInFragmentDirections.actionLogInFragmentToViewPagerContainerFragment())

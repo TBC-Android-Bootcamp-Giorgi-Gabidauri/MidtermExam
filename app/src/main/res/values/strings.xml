@@ -31,4 +31,8 @@
     <string name="repeat_password">Repeat password</string>
     <string name="create_account">Create Account</string>
     <string name="trailer_name">Trailer Name</string>
+    <string name="log_out">Log out</string>
+    <string name="saved_movies">Saved Movies</string>
+    <string name="username">username</string>
+    <string name="email">email</string>
 </resources>

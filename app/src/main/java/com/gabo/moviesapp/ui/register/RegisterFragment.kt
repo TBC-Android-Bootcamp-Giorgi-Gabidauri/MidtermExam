@@ -3,38 +3,58 @@ package com.gabo.moviesapp.ui.register
 import android.os.Bundle
 import android.util.Patterns
 import android.widget.Toast
-import com.gabo.moviesapp.other.base.BaseFragment
+import androidx.lifecycle.Lifecycle
+import androidx.lifecycle.lifecycleScope
+import androidx.lifecycle.repeatOnLifecycle
+import androidx.navigation.fragment.findNavController
 import com.gabo.moviesapp.databinding.FragmentRegisterBinding
-import com.google.firebase.auth.ktx.auth
-import com.google.firebase.ktx.Firebase
+import com.gabo.moviesapp.other.base.BaseFragment
+import com.google.firebase.database.FirebaseDatabase
+import kotlinx.coroutines.launch
+
+val db = FirebaseDatabase.getInstance().getReference("UserData")
 
 class RegisterFragment : BaseFragment<RegisterViewModel, FragmentRegisterBinding>(
     RegisterViewModel::class,
     FragmentRegisterBinding::inflate
 ) {
+
     override fun setupView(savedInstanceState: Bundle?) {
+        listeners()
+    }
+
+    private fun listeners(){
+
+        binding.logInLink.setOnClickListener {
+            findNavController().popBackStack()
+        }
 
         binding.btnRegister.setOnClickListener {
             register(
+                binding.etUserName.text.toString().trim(),
                 binding.etEmail.text.toString().trim(),
-                binding.etPassword.text.toString().trim()
+                binding.etPassword.text.toString().trim(),
+                binding.etRepeatPassword.text.toString().trim(),
             )
         }
     }
 
-    private fun register(email: String, password: String) {
-        if (email.isNotEmpty() && Patterns.EMAIL_ADDRESS.matcher(email)
-                .matches() && password.isNotEmpty() && password.length > 6
+    private fun register(username: String, email: String, password: String, rePassword: String) {
+        if (username.isNotEmpty() && email.isNotEmpty() && Patterns.EMAIL_ADDRESS.matcher(email)
+                .matches() && password.isNotEmpty() && password.length > 6 && password == rePassword
         ) {
-            Firebase.auth.createUserWithEmailAndPassword(email, password).addOnCompleteListener {
-                if (it.isSuccessful) {
-                    Toast.makeText(requireContext(), "Successfully Registered", Toast.LENGTH_SHORT)
-                        .show()
-                } else {
-                    Toast.makeText(requireContext(), "error!", Toast.LENGTH_SHORT).show()
+            viewLifecycleOwner.lifecycleScope.launch{
+                viewLifecycleOwner.repeatOnLifecycle(Lifecycle.State.STARTED){
+                    viewModel.registerUser(username, email, password)
+                    viewModel.registrationState.collect{
+                        if (it == "Successful"){
+                            Toast.makeText(requireContext(), it, Toast.LENGTH_SHORT).show()
+                        }else{
+                            Toast.makeText(requireContext(), it, Toast.LENGTH_SHORT).show()
+                        }
+                    }
                 }
             }
         }
-
     }
 }

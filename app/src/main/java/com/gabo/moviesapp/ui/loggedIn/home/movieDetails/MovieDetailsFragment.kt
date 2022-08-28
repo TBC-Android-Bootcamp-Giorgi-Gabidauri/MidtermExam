@@ -39,10 +39,17 @@ class MovieDetailsFragment : BaseFragment<MovieDetailsViewModel, FragmentMovieDe
     override fun setupView(savedInstanceState: Bundle?) {
         setDetails()
         setupTabLayout()
+        listeners()
+    }
+
+    private fun listeners(){
+        binding.ivBackButton.setOnClickListener {
+            findNavController().popBackStack()
+        }
     }
 
     private fun setDetails() {
-        activityViewModel.movieDetailsFragmentArgs?.value = args.movieModel?.id ?: 0
+        activityViewModel.movieDetailsFragmentArgs.value = args.movieModel?.id ?: 0
         val movieModel = args.movieModel!!
         val genresToFilter = (activity as MainActivity).genresList
         with(binding) {

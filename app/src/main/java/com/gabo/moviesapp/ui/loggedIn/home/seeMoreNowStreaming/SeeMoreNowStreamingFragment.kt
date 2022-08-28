@@ -25,6 +25,13 @@ class SeeMoreNowStreamingFragment :
         val genresList = (activity as MainActivity).genresList
         seeMoreNowStreamingAdapter.submitList(genresList)
         setupObservers()
+        listeners()
+    }
+
+    private fun listeners() {
+        binding.ivBackButton.setOnClickListener {
+            findNavController().popBackStack()
+        }
     }
 
     private fun setupAdapters() {
