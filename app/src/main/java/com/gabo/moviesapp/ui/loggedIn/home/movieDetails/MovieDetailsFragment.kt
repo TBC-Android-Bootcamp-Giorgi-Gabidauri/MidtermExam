@@ -29,6 +29,7 @@ import com.pierfrancescosoffritti.androidyoutubeplayer.core.player.views.YouTube
 import kotlinx.android.synthetic.main.fragment_view_pager_container.*
 import kotlinx.android.synthetic.main.popular_movie_item.*
 import kotlinx.coroutines.flow.collect
+import kotlinx.coroutines.flow.collectLatest
 
 class MovieDetailsFragment : BaseFragment<MovieDetailsViewModel, FragmentMovieDetailsBinding>(
     MovieDetailsViewModel::class,
@@ -60,7 +61,7 @@ class MovieDetailsFragment : BaseFragment<MovieDetailsViewModel, FragmentMovieDe
         with(binding) {
             viewModel.checkIfMovieExist(movieModel.id)
             viewLifecycleOwner.launchStarted {
-                viewModel.movieExist.collect{
+                viewModel.movieExist.collectLatest{
                     if (it) {
                         activityViewModel.deleteMovie(movieModel.id)
                         ivSaveMovie.setImageResource(R.drawable.ic_save_item)

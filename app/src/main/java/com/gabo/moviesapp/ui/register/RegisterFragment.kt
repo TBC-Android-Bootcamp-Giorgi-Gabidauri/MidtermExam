@@ -4,10 +4,12 @@ import android.os.Bundle
 import android.util.Patterns
 import android.view.View
 import android.widget.Toast
+import androidx.core.widget.doOnTextChanged
 import androidx.navigation.fragment.findNavController
 import com.gabo.moviesapp.databinding.FragmentRegisterBinding
 import com.gabo.moviesapp.domain.ConnectionLiveData
 import com.gabo.moviesapp.other.base.BaseFragment
+import com.gabo.moviesapp.other.common.Checkers
 import com.gabo.moviesapp.other.common.isNetworkAvailable
 import com.gabo.moviesapp.other.common.launchStarted
 
@@ -20,13 +22,42 @@ class RegisterFragment : BaseFragment<RegisterViewModel, FragmentRegisterBinding
     override fun setupView(savedInstanceState: Bundle?) {
         connectionLiveData = ConnectionLiveData(requireContext())
         checkNetwork()
+        setupCheckers()
         listeners()
     }
 
-    private fun listeners() {
+    private fun setupCheckers() {
+        val checkers = Checkers(requireContext(), binding)
+        var validEmail = false
+        var validPassword = false
+        var validRepeatedPassword = false
+        with(binding) {
+            etEmail.doOnTextChanged { _, _, _, _ ->
+                validEmail = checkers.emailCheck(etEmail, tilEmailLayout)
+            }
+            etPassword.doOnTextChanged { _, _, _, _ ->
+                validPassword = checkers.emptyError(etPassword, tilPasswordLayout)
+            }
+            etRepeatPassword.doOnTextChanged { _, _, _, _ ->
+                validRepeatedPassword =
+                    checkers.repeatPassCheck(etPassword, etRepeatPassword, tilRepeatPassLayout)
+            }
+            btnRegister.isClickable = validEmail && validPassword && validRepeatedPassword
+        }
+    }
 
+    private fun listeners() {
         binding.logInLink.setOnClickListener {
-            findNavController().navigate(RegisterFragmentDirections.actionRegisterFragmentToLogInFragment())
+            with(binding) {
+                if (etEmail.text.toString().isNotEmpty() && etPassword.text.toString()
+                        .isNotEmpty() && etUserName.text.toString()
+                        .isNotEmpty() && etRepeatPassword.text.toString().isNotEmpty()
+                ){
+                    findNavController().navigate(RegisterFragmentDirections.actionRegisterFragmentToLogInFragment())
+                } else{
+                    Toast.makeText(requireContext(), "Please fill all fields", Toast.LENGTH_SHORT).show()
+                }
+            }
         }
         binding.btnRegister.setOnClickListener {
             if (requireContext().isNetworkAvailable) {
@@ -40,31 +71,28 @@ class RegisterFragment : BaseFragment<RegisterViewModel, FragmentRegisterBinding
         }
     }
 
-    private fun register(username: String, email: String, password: String, rePassword: String) {
+    private fun register(username: String, email: String, password: String, repeatedPassword: String) {
         if (requireContext().isNetworkAvailable) {
-            if (username.isNotEmpty() && email.isNotEmpty() && Patterns.EMAIL_ADDRESS.matcher(email)
-                    .matches() && password.isNotEmpty() && password.length > 6 && password == rePassword
-            ) {
-                viewLifecycleOwner.launchStarted {
-                    binding.progressBar.visibility = View.VISIBLE
-                    binding.clRegister.visibility = View.GONE
-                    viewModel.registerUser(username, email, password)
-                    viewModel.registrationState.collect {
-                        if (it == "Successful") {
-                            binding.progressBar.visibility = View.GONE
-                            findNavController().navigate(RegisterFragmentDirections.actionRegisterFragmentToViewPagerContainerFragment())
-                            Toast.makeText(requireContext(), it, Toast.LENGTH_SHORT)
-                                .show()
-                        } else {
-                            binding.progressBar.visibility = View.GONE
-                            binding.clRegister.visibility = View.VISIBLE
-                            if(it.isNotEmpty()){
-                                Toast.makeText(requireContext(), it, Toast.LENGTH_SHORT).show()
-                            }
+            viewLifecycleOwner.launchStarted {
+                binding.progressBar.visibility = View.VISIBLE
+                binding.clRegister.visibility = View.GONE
+                viewModel.registerUser(username, email, password)
+                viewModel.registrationState.collect {
+                    if (it == "Successful") {
+                        binding.progressBar.visibility = View.GONE
+                        findNavController().navigate(RegisterFragmentDirections.actionRegisterFragmentToViewPagerContainerFragment())
+                        Toast.makeText(requireContext(), it, Toast.LENGTH_SHORT)
+                            .show()
+                    } else {
+                        binding.progressBar.visibility = View.GONE
+                        binding.clRegister.visibility = View.VISIBLE
+                        if (it.isNotEmpty()) {
+                            Toast.makeText(requireContext(), it, Toast.LENGTH_SHORT).show()
                         }
                     }
                 }
             }
+
         }
     }
 

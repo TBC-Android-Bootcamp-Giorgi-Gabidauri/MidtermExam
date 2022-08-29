@@ -8,10 +8,10 @@ import androidx.paging.PagingData
 import androidx.paging.cachedIn
 import com.gabo.moviesapp.data.models.movieModels.MovieModel
 import com.gabo.moviesapp.data.paging.NowStreamingMoviesPagingSource
-import com.gabo.moviesapp.domain.usecases.GetNowPlayingMoviesUseCase
+import com.gabo.moviesapp.domain.usecases.GetNowStreamingMoviesUseCase
 import kotlinx.coroutines.flow.Flow
 
-class SeeMoreNowStreamingViewModel(private val getNowPlayingMoviesUseCase: GetNowPlayingMoviesUseCase) :
+class SeeMoreNowStreamingViewModel(private val getNowPlayingMoviesUseCase: GetNowStreamingMoviesUseCase) :
     ViewModel() {
     fun getNowPlayingMovies(): Flow<PagingData<MovieModel>> {
         return Pager(
