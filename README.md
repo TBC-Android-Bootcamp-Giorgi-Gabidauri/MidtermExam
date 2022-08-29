@@ -17,21 +17,26 @@ in this app you can:
 How To Use
 -----------
 - to use app user needs an account.
+<img src="https://your-image-url.type" width="100" height="100">
 
-![login](https://user-images.githubusercontent.com/66998427/187107806-1a4c2f5e-6957-4896-ba46-51f27f6532c7.png) ![register](https://user-images.githubusercontent.com/66998427/187107816-e3e0e87a-1867-40e6-b1cb-b9c57d9f617e.png)
+<img src = "https://user-images.githubusercontent.com/66998427/187107806-1a4c2f5e-6957-4896-ba46-51f27f6532c7.png" width = "100" height = "100">
+![register](https://user-images.githubusercontent.com/66998427/187107816-e3e0e87a-1867-40e6-b1cb-b9c57d9f617e.png)
 
 on the first page (Home) you can see:
 - Now straming section (if you want to see more just click on it).
 - list of Popular Movies.
 - you can scroll through the genres to see them all.
 
-![home](https://user-images.githubusercontent.com/66998427/187107865-c65d13f1-8db7-411a-a55e-012a3b31bf9d.png) ![nowStreaming](https://user-images.githubusercontent.com/66998427/187107867-3e2ac33a-ac7b-452d-8775-71e981f16c3e.png)
+![home](https://user-images.githubusercontent.com/66998427/187107865-c65d13f1-8db7-411a-a55e-012a3b31bf9d.png)
+![nowStreaming](https://user-images.githubusercontent.com/66998427/187107867-3e2ac33a-ac7b-452d-8775-71e981f16c3e.png)
 
 to see more details about current film, just click on it and you will navigate to movie details screen.
 - here you can see poster, description, raiting, genres and more.
 - you can click on "save film" icon to add the film to your list.
 - or click again to remove it from your list.
-![removed](https://user-images.githubusercontent.com/66998427/187107905-3b362bd5-508b-443e-9018-d37457b55ad1.png) ![saved](https://user-images.githubusercontent.com/66998427/187107910-827182a6-c78b-44c7-81af-562b3ab4d155.png)
+
+![removed](https://user-images.githubusercontent.com/66998427/187107905-3b362bd5-508b-443e-9018-d37457b55ad1.png)
+![saved](https://user-images.githubusercontent.com/66998427/187107910-827182a6-c78b-44c7-81af-562b3ab4d155.png)
 
 below you can seeL list of trailers and related movies from youtube.
 
