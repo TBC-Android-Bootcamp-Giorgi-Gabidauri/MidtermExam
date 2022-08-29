@@ -1,103 +1,144 @@
 <?xml version="1.0" encoding="utf-8"?>
-<androidx.core.widget.NestedScrollView xmlns:android="http://schemas.android.com/apk/res/android"
+<androidx.swiperefreshlayout.widget.SwipeRefreshLayout xmlns:android="http://schemas.android.com/apk/res/android"
     xmlns:app="http://schemas.android.com/apk/res-auto"
     xmlns:tools="http://schemas.android.com/tools"
     android:layout_width="match_parent"
+    android:id="@+id/swipeRefresh"
     android:layout_height="wrap_content"
     android:background="@color/bg_gray"
-    android:padding="@dimen/dimen_16dp"
+    android:orientation="vertical"
     tools:context=".ui.loggedIn.home.HomeFragment">
 
-    <androidx.constraintlayout.widget.ConstraintLayout
+    <androidx.appcompat.widget.LinearLayoutCompat
         android:layout_width="match_parent"
-        android:layout_height="wrap_content">
+        android:layout_height="wrap_content"
+        android:id="@+id/llHome"
+        android:background="@color/bg_gray"
+        android:orientation="vertical">
 
-        <TextView
-            android:id="@+id/tvNowStreaming"
-            android:layout_width="wrap_content"
+        <androidx.appcompat.widget.AppCompatTextView
+            android:id="@+id/tvNoInternet"
+            android:layout_width="match_parent"
             android:layout_height="wrap_content"
-            android:layout_marginTop="@dimen/dimen_16dp"
-            android:text="@string/now_streaming"
+            android:background="@color/black"
+            android:gravity="center"
+            android:padding="@dimen/dimen_16dp"
+            android:text="@string/please_connect_to_a_network_text"
             android:textColor="@color/white"
-            android:textSize="@dimen/dimen_16sp"
-            android:textStyle="bold"
+            android:textSize="@dimen/dimen_20sp"
+            app:layout_constraintEnd_toEndOf="parent"
             app:layout_constraintStart_toStartOf="parent"
             app:layout_constraintTop_toTopOf="parent" />
 
-        <androidx.appcompat.widget.AppCompatButton
-            android:id="@+id/btnSeeMoreNowStreaming"
-            android:layout_width="wrap_content"
-            android:layout_height="0dp"
-            android:background="@drawable/bg_genre"
-            android:text="@string/see_more"
-            android:textAllCaps="false"
-            android:textColor="@color/white"
-            android:textSize="12sp"
-            app:layout_constraintBottom_toBottomOf="@id/tvNowStreaming"
-            app:layout_constraintEnd_toEndOf="parent"
-            app:layout_constraintTop_toTopOf="@id/tvNowStreaming" />
-
-        <com.google.android.material.divider.MaterialDivider
-            android:layout_width="wrap_content"
-            android:layout_height="2dp"
-            android:layout_marginTop="@dimen/dimen_8dp"
-            app:layout_constraintEnd_toEndOf="parent"
-            app:layout_constraintStart_toStartOf="parent"
-            app:layout_constraintTop_toBottomOf="@id/tvNowStreaming" />
-
-        <LinearLayout
-            android:id="@+id/llNowStreamingMovies"
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
-            android:layout_marginTop="@dimen/dimen_16dp"
-            app:layout_constraintStart_toStartOf="parent"
-            app:layout_constraintTop_toBottomOf="@id/tvNowStreaming">
-
-            <include
-                android:id="@+id/nsMovieFirst"
-                layout="@layout/now_streaming_movie_item" />
-
-            <include
-                android:id="@+id/nsMovieSecond"
-                layout="@layout/now_streaming_movie_item" />
-
-            <include
-                android:id="@+id/nsMovieThird"
-                layout="@layout/now_streaming_movie_item" />
-        </LinearLayout>
-
-        <TextView
-            android:id="@+id/tvPopular"
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
-            android:layout_marginTop="8dp"
-            android:text="@string/popular"
-            android:textColor="@color/white"
-            android:textSize="@dimen/dimen_16sp"
-            android:textStyle="bold"
-            app:layout_constraintStart_toStartOf="parent"
-            app:layout_constraintTop_toBottomOf="@id/llNowStreamingMovies" />
-
-        <com.google.android.material.divider.MaterialDivider
-            android:layout_width="wrap_content"
-            android:layout_height="@dimen/dimen_2dp"
-            android:id="@+id/mdPopular"
-            android:layout_marginTop="@dimen/dimen_8dp"
-            app:layout_constraintEnd_toEndOf="parent"
-            app:layout_constraintStart_toStartOf="parent"
-            app:layout_constraintTop_toBottomOf="@id/tvPopular" />
-
-        <androidx.recyclerview.widget.RecyclerView
-            android:id="@+id/rvPopularMovies"
+        <androidx.core.widget.NestedScrollView
+            android:id="@+id/nsvHome"
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
-            android:layout_marginTop="8dp"
-            android:background="@color/bg_gray"
-            app:layout_constraintBottom_toBottomOf="parent"
-            app:layout_constraintEnd_toEndOf="parent"
-            app:layout_constraintStart_toStartOf="parent"
-            app:layout_constraintTop_toBottomOf="@id/mdPopular"
-            tools:listitem="@layout/popular_movie_item" />
+            android:padding="@dimen/dimen_16dp">
 
-    </androidx.constraintlayout.widget.ConstraintLayout>
-</androidx.core.widget.NestedScrollView>
+            <androidx.constraintlayout.widget.ConstraintLayout
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content">
+
+                <TextView
+                    android:id="@+id/tvNowStreaming"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:layout_marginTop="@dimen/dimen_16dp"
+                    android:text="@string/now_streaming"
+                    android:textColor="@color/white"
+                    android:textSize="@dimen/dimen_16sp"
+                    android:textStyle="bold"
+                    app:layout_constraintStart_toStartOf="parent"
+                    app:layout_constraintTop_toTopOf="parent" />
+
+                <androidx.appcompat.widget.AppCompatButton
+                    android:id="@+id/btnSeeMoreNowStreaming"
+                    android:layout_width="wrap_content"
+                    android:layout_height="0dp"
+                    android:background="@drawable/bg_genre"
+                    android:text="@string/see_more"
+                    android:textAllCaps="false"
+                    android:textColor="@color/white"
+                    android:textSize="12sp"
+                    app:layout_constraintBottom_toBottomOf="@id/tvNowStreaming"
+                    app:layout_constraintEnd_toEndOf="parent"
+                    app:layout_constraintTop_toTopOf="@id/tvNowStreaming" />
+
+                <com.google.android.material.divider.MaterialDivider
+                    android:layout_width="wrap_content"
+                    android:layout_height="2dp"
+                    android:layout_marginTop="@dimen/dimen_8dp"
+                    app:layout_constraintEnd_toEndOf="parent"
+                    app:layout_constraintStart_toStartOf="parent"
+                    app:layout_constraintTop_toBottomOf="@id/tvNowStreaming" />
+
+                <LinearLayout
+                    android:id="@+id/llNowStreamingMovies"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:layout_marginTop="@dimen/dimen_16dp"
+                    android:visibility="gone"
+                    app:layout_constraintStart_toStartOf="parent"
+                    app:layout_constraintTop_toBottomOf="@id/tvNowStreaming">
+
+                    <include
+                        android:id="@+id/nsMovieFirst"
+                        layout="@layout/now_streaming_movie_item" />
+
+                    <include
+                        android:id="@+id/nsMovieSecond"
+                        layout="@layout/now_streaming_movie_item" />
+
+                    <include
+                        android:id="@+id/nsMovieThird"
+                        layout="@layout/now_streaming_movie_item" />
+                </LinearLayout>
+
+                <TextView
+                    android:id="@+id/tvPopular"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:layout_marginTop="8dp"
+                    android:text="@string/popular"
+                    android:textColor="@color/white"
+                    android:textSize="@dimen/dimen_16sp"
+                    android:textStyle="bold"
+                    app:layout_constraintStart_toStartOf="parent"
+                    app:layout_constraintTop_toBottomOf="@id/llNowStreamingMovies" />
+
+                <com.google.android.material.divider.MaterialDivider
+                    android:id="@+id/mdPopular"
+                    android:layout_width="wrap_content"
+                    android:layout_height="@dimen/dimen_2dp"
+                    android:layout_marginTop="@dimen/dimen_8dp"
+                    app:layout_constraintEnd_toEndOf="parent"
+                    app:layout_constraintStart_toStartOf="parent"
+                    app:layout_constraintTop_toBottomOf="@id/tvPopular" />
+
+                <androidx.recyclerview.widget.RecyclerView
+                    android:id="@+id/rvPopularMovies"
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:layout_marginTop="8dp"
+                    android:background="@color/bg_gray"
+                    app:layout_constraintBottom_toBottomOf="parent"
+                    app:layout_constraintEnd_toEndOf="parent"
+                    app:layout_constraintStart_toStartOf="parent"
+                    app:layout_constraintTop_toBottomOf="@id/mdPopular"
+                    tools:listitem="@layout/popular_movie_item" />
+
+                <ProgressBar
+                    android:id="@+id/progressBar"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:layout_marginTop="200dp"
+                    android:visibility="gone"
+                    app:layout_constraintEnd_toEndOf="parent"
+                    app:layout_constraintStart_toStartOf="parent"
+                    app:layout_constraintTop_toTopOf="parent" />
+
+            </androidx.constraintlayout.widget.ConstraintLayout>
+        </androidx.core.widget.NestedScrollView>
+    </androidx.appcompat.widget.LinearLayoutCompat>
+</androidx.swiperefreshlayout.widget.SwipeRefreshLayout>

@@ -9,6 +9,7 @@ import androidx.recyclerview.widget.RecyclerView
 import com.bumptech.glide.Glide
 import com.bumptech.glide.request.RequestOptions
 import com.bumptech.glide.request.target.Target
+import com.gabo.moviesapp.R
 import com.gabo.moviesapp.data.models.genreModels.GenreModel
 import com.gabo.moviesapp.data.models.movieModels.MovieModel
 import com.gabo.moviesapp.databinding.PopularMovieItemBinding
@@ -18,7 +19,9 @@ import com.gabo.moviesapp.other.common.loadImage
 import com.gabo.moviesapp.other.common.loadImageDecreasedQuality
 import com.gabo.moviesapp.other.common.setupGenres
 
-class PopularMoviesAdapter(private val click: (MovieModel) -> Unit) :
+class PopularMoviesAdapter(
+    private val itemClick: (MovieModel) -> Unit
+) :
     PagingDataAdapter<MovieModel, PopularMoviesAdapter.MovieVH>(MovieDiffCallback()) {
     private var genresList: List<GenreModel> = emptyList()
 
@@ -30,13 +33,13 @@ class PopularMoviesAdapter(private val click: (MovieModel) -> Unit) :
 
     inner class MovieVH(private val binding: PopularMovieItemBinding) :
         RecyclerView.ViewHolder(binding.root) {
-        fun bind(model: MovieModel, click: (MovieModel) -> Unit) {
+        fun bind(model: MovieModel, itemClick: (MovieModel) -> Unit) {
             with(binding) {
                 rvGenres.setupGenres(genresList, model)
                 tvTitle.text = model.title
                 tvRating.text = model.Rating.toString()
-                ivPoster.loadImageDecreasedQuality(BASE_IMAGE_URL+model.imageUrl)
-                itemView.setOnClickListener { click(model) }
+                ivPoster.loadImageDecreasedQuality(BASE_IMAGE_URL + model.imageUrl)
+                itemView.setOnClickListener { itemClick(model) }
             }
         }
     }
@@ -48,6 +51,6 @@ class PopularMoviesAdapter(private val click: (MovieModel) -> Unit) :
     }
 
     override fun onBindViewHolder(holder: MovieVH, position: Int) {
-        holder.bind(getItem(position)!!, click)
+        holder.bind(getItem(position)!!, itemClick)
     }
 }

@@ -1,15 +1,56 @@
 <?xml version="1.0" encoding="utf-8"?>
-<FrameLayout xmlns:android="http://schemas.android.com/apk/res/android"
+<androidx.appcompat.widget.LinearLayoutCompat xmlns:android="http://schemas.android.com/apk/res/android"
     xmlns:tools="http://schemas.android.com/tools"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
+    android:background="@color/appBackGround"
+    android:orientation="vertical"
     tools:context=".ui.loggedIn.search.SearchFragment">
 
-    <TextView
+    <androidx.appcompat.widget.AppCompatTextView
+        android:id="@+id/tvNoInternet"
         android:layout_width="match_parent"
-        android:layout_height="match_parent"
-        android:text="SearchFragment"
-        android:textSize="40dp"
-        android:gravity="center"/>
+        android:layout_height="wrap_content"
+        android:background="@color/black"
+        android:gravity="center"
+        android:padding="@dimen/dimen_16dp"
+        android:visibility="gone"
+        android:text="@string/please_connect_to_a_network_text"
+        android:textColor="@color/white"
+        android:textSize="@dimen/dimen_20sp"/>
 
-</FrameLayout>
+    <androidx.appcompat.widget.LinearLayoutCompat
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:orientation="vertical">
+
+        <androidx.appcompat.widget.AppCompatEditText
+            android:id="@+id/searchView"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:layout_marginStart="@dimen/dimen_16dp"
+            android:layout_marginTop="@dimen/dimen_24dp"
+            android:layout_marginEnd="@dimen/dimen_16dp"
+            android:background="@drawable/bg_search_view"
+            android:drawableStart="@drawable/ic_baseline_search_24"
+            android:hint="@string/search"
+            android:iconifiedByDefault="false"
+            android:inputType="text"
+            android:paddingStart="@dimen/dimen_8dp"
+            android:paddingTop="@dimen/dimen_10dp"
+            android:paddingEnd="@dimen/dimen_0dp"
+            android:paddingBottom="@dimen/dimen_10dp"
+            android:queryHint="Search friends here ^_^"
+            android:textColor="@color/white"
+            android:textSize="@dimen/dimen_20sp" />
+
+        <androidx.recyclerview.widget.RecyclerView
+            android:id="@+id/rvSearch"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:layout_marginStart="@dimen/dimen_16dp"
+            android:layout_marginTop="@dimen/dimen_16dp"
+            android:layout_marginEnd="@dimen/dimen_16dp"
+            tools:listitem="@layout/popular_movie_item" />
+    </androidx.appcompat.widget.LinearLayoutCompat>
+</androidx.appcompat.widget.LinearLayoutCompat>

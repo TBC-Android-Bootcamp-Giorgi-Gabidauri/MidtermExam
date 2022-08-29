@@ -1,5 +1,8 @@
 package com.gabo.moviesapp.other.common
 
+import android.content.Context
+import android.net.ConnectivityManager
+import android.net.NetworkCapabilities
 import android.widget.ImageView
 import androidx.lifecycle.Lifecycle
 import androidx.lifecycle.LifecycleOwner
@@ -46,7 +49,7 @@ fun NowStreamingMovieItemBinding.setNowStreamingData(
     }
 }
 
-fun ImageView.loadImage(imgUrl: String) {
+fun ImageView.loadImage(imgUrl: Any) {
     Glide.with(this).load(BASE_IMAGE_URL + imgUrl).into(this)
 }
 
@@ -75,3 +78,18 @@ fun RecyclerView.setupGenres(genresList: List<GenreModel>, model: MovieModel) {
     }
     genresAdapter.submitList(filtered.toList())
 }
+
+val Context.isNetworkAvailable: Boolean
+    get() {
+        val connectivityManager =
+            this.getSystemService(Context.CONNECTIVITY_SERVICE) as ConnectivityManager
+        return run {
+            val nw = connectivityManager.activeNetwork ?: return false
+            val actNw = connectivityManager.getNetworkCapabilities(nw) ?: return false
+            when {
+                actNw.hasTransport(NetworkCapabilities.TRANSPORT_WIFI) -> true
+                actNw.hasTransport(NetworkCapabilities.TRANSPORT_CELLULAR) -> true
+                else -> false
+            }
+        }
+    }

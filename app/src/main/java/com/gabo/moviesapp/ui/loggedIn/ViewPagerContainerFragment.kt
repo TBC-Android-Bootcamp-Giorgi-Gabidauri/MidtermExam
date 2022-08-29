@@ -39,8 +39,6 @@ class ViewPagerContainerFragment : Fragment() {
                             true
                         1 -> bottomBar.menu.findItem(R.id.searchFragment).isChecked =
                             true
-                        2 -> bottomBar.menu.findItem(R.id.favouritesFragment).isChecked =
-                            true
                         else -> bottomBar.menu.findItem(R.id.profileFragment).isChecked =
                             true
                     }
@@ -57,12 +55,8 @@ class ViewPagerContainerFragment : Fragment() {
                         viewPager.currentItem = 1
                         true
                     }
-                    R.id.favouritesFragment -> {
-                        viewPager.currentItem = 2
-                        true
-                    }
                     else -> {
-                        viewPager.currentItem = 3
+                        viewPager.currentItem = 2
                         true
                     }
                 }
