@@ -2,39 +2,81 @@ package com.gabo.moviesapp.ui.register
 
 import android.os.Bundle
 import android.util.Patterns
+import android.view.View
 import android.widget.Toast
-import com.gabo.moviesapp.other.base.BaseFragment
+import androidx.navigation.fragment.findNavController
 import com.gabo.moviesapp.databinding.FragmentRegisterBinding
-import com.google.firebase.auth.ktx.auth
-import com.google.firebase.ktx.Firebase
+import com.gabo.moviesapp.domain.ConnectionLiveData
+import com.gabo.moviesapp.other.base.BaseFragment
+import com.gabo.moviesapp.other.common.isNetworkAvailable
+import com.gabo.moviesapp.other.common.launchStarted
 
 class RegisterFragment : BaseFragment<RegisterViewModel, FragmentRegisterBinding>(
     RegisterViewModel::class,
     FragmentRegisterBinding::inflate
 ) {
-    override fun setupView(savedInstanceState: Bundle?) {
+    private lateinit var connectionLiveData: ConnectionLiveData
 
+    override fun setupView(savedInstanceState: Bundle?) {
+        connectionLiveData = ConnectionLiveData(requireContext())
+        checkNetwork()
+        listeners()
+    }
+
+    private fun listeners() {
+
+        binding.logInLink.setOnClickListener {
+            findNavController().navigate(RegisterFragmentDirections.actionRegisterFragmentToLogInFragment())
+        }
         binding.btnRegister.setOnClickListener {
-            register(
-                binding.etEmail.text.toString().trim(),
-                binding.etPassword.text.toString().trim()
-            )
+            if (requireContext().isNetworkAvailable) {
+                register(
+                    binding.etUserName.text.toString().trim(),
+                    binding.etEmail.text.toString().trim(),
+                    binding.etPassword.text.toString().trim(),
+                    binding.etRepeatPassword.text.toString().trim(),
+                )
+            }
         }
     }
 
-    private fun register(email: String, password: String) {
-        if (email.isNotEmpty() && Patterns.EMAIL_ADDRESS.matcher(email)
-                .matches() && password.isNotEmpty() && password.length > 6
-        ) {
-            Firebase.auth.createUserWithEmailAndPassword(email, password).addOnCompleteListener {
-                if (it.isSuccessful) {
-                    Toast.makeText(requireContext(), "Successfully Registered", Toast.LENGTH_SHORT)
-                        .show()
-                } else {
-                    Toast.makeText(requireContext(), "error!", Toast.LENGTH_SHORT).show()
+    private fun register(username: String, email: String, password: String, rePassword: String) {
+        if (requireContext().isNetworkAvailable) {
+            if (username.isNotEmpty() && email.isNotEmpty() && Patterns.EMAIL_ADDRESS.matcher(email)
+                    .matches() && password.isNotEmpty() && password.length > 6 && password == rePassword
+            ) {
+                viewLifecycleOwner.launchStarted {
+                    binding.progressBar.visibility = View.VISIBLE
+                    binding.clRegister.visibility = View.GONE
+                    viewModel.registerUser(username, email, password)
+                    viewModel.registrationState.collect {
+                        if (it == "Successful") {
+                            binding.progressBar.visibility = View.GONE
+                            findNavController().navigate(RegisterFragmentDirections.actionRegisterFragmentToViewPagerContainerFragment())
+                            Toast.makeText(requireContext(), it, Toast.LENGTH_SHORT)
+                                .show()
+                        } else {
+                            binding.progressBar.visibility = View.GONE
+                            binding.clRegister.visibility = View.VISIBLE
+                            if(it.isNotEmpty()){
+                                Toast.makeText(requireContext(), it, Toast.LENGTH_SHORT).show()
+                            }
+                        }
+                    }
                 }
             }
         }
+    }
 
+    private fun checkNetwork() {
+        connectionLiveData.observe(this) { isConnected ->
+            with(binding) {
+                if (isConnected) {
+                    tvNoInternet.visibility = View.GONE
+                } else {
+                    tvNoInternet.visibility = View.VISIBLE
+                }
+            }
+        }
     }
 }

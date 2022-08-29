@@ -1,5 +1,7 @@
 package com.gabo.moviesapp.other.common
 
+const val TABLE_NAME = "MOVIES_TABLE"
+const val DATABASE_NAME = "MOVIES_DATABASE"
 const val API_KEY = "938eec1132c5f17fa4284f5d8940768b"
 const val BASE_URL = "https://api.themoviedb.org"
 const val BASE_IMAGE_URL = "https://image.tmdb.org/t/p/w500"
