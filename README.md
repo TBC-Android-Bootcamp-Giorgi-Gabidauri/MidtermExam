@@ -53,8 +53,7 @@ https://user-images.githubusercontent.com/66998427/187108024-ebc84b54-0c5f-4402-
 
 <img src="https://user-images.githubusercontent.com/66998427/187108144-d0f786d9-199d-42f5-94e7-a70c3f44cfce.png" width="300" height="600">
 
-# if you open application without internet, or you lost it while using the app,
-certainly you can't use app the same proper way, but you can still see your list of saved movies.
+# if you open application without internet, or you lost it while using the app, certainly you can't use app the same proper way, but you can still see your list of saved movies.
 
 https://user-images.githubusercontent.com/66998427/187108314-1a2782cd-3f12-4364-9119-efac740c8d4e.mp4
 
