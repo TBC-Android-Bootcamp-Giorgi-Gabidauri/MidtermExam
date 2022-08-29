@@ -20,8 +20,7 @@ import com.gabo.moviesapp.other.common.loadImageDecreasedQuality
 import com.gabo.moviesapp.other.common.setupGenres
 
 class PopularMoviesAdapter(
-    private val itemClick: (MovieModel) -> Unit,
-    private val saveClick: (MovieModel,Int) -> Unit
+    private val itemClick: (MovieModel) -> Unit
 ) :
     PagingDataAdapter<MovieModel, PopularMoviesAdapter.MovieVH>(MovieDiffCallback()) {
     private var genresList: List<GenreModel> = emptyList()
@@ -34,18 +33,12 @@ class PopularMoviesAdapter(
 
     inner class MovieVH(private val binding: PopularMovieItemBinding) :
         RecyclerView.ViewHolder(binding.root) {
-        fun bind(model: MovieModel, itemClick: (MovieModel) -> Unit,saveClick: (MovieModel,Int) -> Unit, position: Int) {
+        fun bind(model: MovieModel, itemClick: (MovieModel) -> Unit) {
             with(binding) {
                 rvGenres.setupGenres(genresList, model)
                 tvTitle.text = model.title
                 tvRating.text = model.Rating.toString()
                 ivPoster.loadImageDecreasedQuality(BASE_IMAGE_URL + model.imageUrl)
-                if (model.isSaved == true) {
-                    ivSaveMovie.setImageResource(R.drawable.ic_save_item_filled)
-                } else {
-                    ivSaveMovie.setImageResource(R.drawable.ic_save_item)
-                }
-                ivSaveMovie.setOnClickListener { saveClick(model,position) }
                 itemView.setOnClickListener { itemClick(model) }
             }
         }
@@ -58,6 +51,6 @@ class PopularMoviesAdapter(
     }
 
     override fun onBindViewHolder(holder: MovieVH, position: Int) {
-        holder.bind(getItem(position)!!, itemClick,saveClick,position)
+        holder.bind(getItem(position)!!, itemClick)
     }
 }

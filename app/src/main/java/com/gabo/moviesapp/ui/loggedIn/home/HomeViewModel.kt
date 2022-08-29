@@ -21,8 +21,7 @@ import kotlinx.coroutines.launch
 
 class HomeViewModel(
     private val getPopularMoviesUseCase: GetPopularMoviesUseCase,
-    private val getNowPlayingMoviesUseCase: GetNowPlayingMoviesUseCase,
-    private val checkIfMovieExistUseCase: CheckIfMovieExistUseCase
+    private val getNowPlayingMoviesUseCase: GetNowPlayingMoviesUseCase
 ) : ViewModel() {
     val movieExist = MutableStateFlow(false)
 
@@ -46,9 +45,5 @@ class HomeViewModel(
         }
     }
 
-    fun checkIfMovieExist(id: Int) {
-        CoroutineScope(Dispatchers.IO).launch {
-            movieExist.value = checkIfMovieExistUseCase(id)
-        }
-    }
+
 }

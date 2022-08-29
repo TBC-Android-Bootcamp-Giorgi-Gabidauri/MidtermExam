@@ -13,6 +13,7 @@ import com.gabo.moviesapp.databinding.FragmentSimilarMoviesBinding
 import com.gabo.moviesapp.domain.ConnectionLiveData
 import com.gabo.moviesapp.other.adapters.rvAdapters.SimilarMoviesAdapter
 import com.gabo.moviesapp.other.base.BaseFragment
+import com.gabo.moviesapp.other.common.isNetworkAvailable
 import com.gabo.moviesapp.other.common.launchStarted
 import com.gabo.moviesapp.other.common.setupAdapter
 import com.gabo.moviesapp.other.responseHelpers.ResponseHandler
@@ -34,26 +35,16 @@ class SimilarMoviesFragment : BaseFragment<SimilarMoviesViewModel, FragmentSimil
         checkNetwork()
         val genresList = (activity as MainActivity).genresList
         similarMoviesAdapter.submitGenresList(genresList)
+        if (requireContext().isNetworkAvailable) {
+            setupObservers()
+        }
     }
 
     private fun setupAdapters() {
         similarMoviesAdapter =
-            binding.rvSimilarMovies.setupAdapter(SimilarMoviesAdapter(itemClick = {
+            binding.rvSimilarMovies.setupAdapter(SimilarMoviesAdapter {
                 navigateToDetails(it)
-            }, saveClick = { saveStateControl(it) }), LinearLayoutManager(requireContext()))
-    }
-    private fun saveStateControl(movieModel: MovieModel) {
-        if (movieModel.isSaved == true){
-            movieModel.isSaved = false
-            activityViewModel.deleteMovie(movieModel.id)
-            ivSaveMovie.setImageResource(R.drawable.ic_save_item)
-            Toast.makeText(requireContext(), "Removed", Toast.LENGTH_SHORT).show()
-        } else{
-            movieModel.isSaved = true
-            activityViewModel.saveMovie(movieModel)
-            ivSaveMovie.setImageResource(R.drawable.ic_save_item_filled)
-            Toast.makeText(requireContext(), "Saved", Toast.LENGTH_SHORT).show()
-        }
+            }, LinearLayoutManager(requireContext()))
     }
 
     private fun setupObservers() {
@@ -91,6 +82,8 @@ class SimilarMoviesFragment : BaseFragment<SimilarMoviesViewModel, FragmentSimil
                     if (similarMoviesAdapter.itemCount > 0) {
                         progressBar.visibility = View.GONE
                     } else {
+                        val genresList = (activity as MainActivity).genresList
+                        similarMoviesAdapter.submitGenresList(genresList)
                         setupObservers()
                     }
                 } else {

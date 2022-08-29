@@ -18,10 +18,7 @@ import com.gabo.moviesapp.other.adapters.rvAdapters.SimilarMoviesAdapter
 import com.gabo.moviesapp.other.adapters.viewPagerAdapter.TabLayoutAdapter
 import com.gabo.moviesapp.other.adapters.viewPagerAdapter.ViewPagerAdapter
 import com.gabo.moviesapp.other.base.BaseFragment
-import com.gabo.moviesapp.other.common.launchStarted
-import com.gabo.moviesapp.other.common.loadImage
-import com.gabo.moviesapp.other.common.setupAdapter
-import com.gabo.moviesapp.other.common.setupGenres
+import com.gabo.moviesapp.other.common.*
 import com.gabo.moviesapp.other.responseHelpers.ResponseHandler
 import com.gabo.moviesapp.ui.MainActivity
 import com.gabo.moviesapp.ui.MainViewModel
@@ -31,6 +28,7 @@ import com.pierfrancescosoffritti.androidyoutubeplayer.core.player.listeners.Abs
 import com.pierfrancescosoffritti.androidyoutubeplayer.core.player.views.YouTubePlayerView
 import kotlinx.android.synthetic.main.fragment_view_pager_container.*
 import kotlinx.android.synthetic.main.popular_movie_item.*
+import kotlinx.coroutines.flow.collect
 
 class MovieDetailsFragment : BaseFragment<MovieDetailsViewModel, FragmentMovieDetailsBinding>(
     MovieDetailsViewModel::class,
@@ -38,6 +36,7 @@ class MovieDetailsFragment : BaseFragment<MovieDetailsViewModel, FragmentMovieDe
 ) {
     private val args: MovieDetailsFragmentArgs by navArgs()
     private val activityViewModel: MainViewModel by activityViewModels()
+
     private lateinit var movieModel: MovieModel
     override fun setupView(savedInstanceState: Bundle?) {
         setDetails()
@@ -45,8 +44,8 @@ class MovieDetailsFragment : BaseFragment<MovieDetailsViewModel, FragmentMovieDe
         setupClickListeners()
     }
 
-    private fun setupClickListeners(){
-        with(binding){
+    private fun setupClickListeners() {
+        with(binding) {
             ivSaveMovie.setOnClickListener {
                 saveStateControl()
             }
@@ -54,21 +53,25 @@ class MovieDetailsFragment : BaseFragment<MovieDetailsViewModel, FragmentMovieDe
             ivBackButton.setOnClickListener {
                 findNavController().popBackStack()
             }
-
         }
     }
 
     private fun saveStateControl() {
-        if (movieModel.isSaved == true){
-            movieModel.isSaved = false
-            activityViewModel.deleteMovie(movieModel.id)
-            ivSaveMovie.setImageResource(R.drawable.ic_save_item)
-            Toast.makeText(requireContext(), "Removed", Toast.LENGTH_SHORT).show()
-        } else{
-            movieModel.isSaved = true
-            activityViewModel.saveMovie(movieModel)
-            ivSaveMovie.setImageResource(R.drawable.ic_save_item_filled)
-            Toast.makeText(requireContext(), "Saved", Toast.LENGTH_SHORT).show()
+        with(binding) {
+            viewModel.checkIfMovieExist(movieModel.id)
+            viewLifecycleOwner.launchStarted {
+                viewModel.movieExist.collect{
+                    if (it) {
+                        activityViewModel.deleteMovie(movieModel.id)
+                        ivSaveMovie.setImageResource(R.drawable.ic_save_item)
+                        Toast.makeText(requireContext(), "Removed", Toast.LENGTH_SHORT).show()
+                    } else {
+                        activityViewModel.saveMovie(movieModel)
+                        ivSaveMovie.setImageResource(R.drawable.ic_save_item_filled)
+                        Toast.makeText(requireContext(), "Saved", Toast.LENGTH_SHORT).show()
+                    }
+                }
+            }
         }
     }
 
@@ -82,10 +85,21 @@ class MovieDetailsFragment : BaseFragment<MovieDetailsViewModel, FragmentMovieDe
             tvTitle.text = movieModel.title
             tvRating.text = movieModel.Rating.toString()
             rvGenres.setupGenres(genresToFilter, movieModel)
-            if (movieModel.isSaved == true){
-                ivSaveMovie.setImageResource(R.drawable.ic_save_item_filled)
-            } else{
-                ivSaveMovie.setImageResource(R.drawable.ic_save_item)
+            viewModel.checkIfMovieExist(movieModel.id)
+            setupObservers()
+        }
+    }
+
+    private fun setupObservers() {
+        viewLifecycleOwner.launchStarted {
+            with(binding) {
+                viewModel.movieExist.collect {
+                    if (it) {
+                        ivSaveMovie.setImageResource(R.drawable.ic_save_item_filled)
+                    } else {
+                        ivSaveMovie.setImageResource(R.drawable.ic_save_item)
+                    }
+                }
             }
         }
     }
@@ -97,7 +111,7 @@ class MovieDetailsFragment : BaseFragment<MovieDetailsViewModel, FragmentMovieDe
                 ViewPager2.OnPageChangeCallback() {
                 override fun onPageSelected(position: Int) {
                     super.onPageSelected(position)
-                    with(tabLayout){
+                    with(tabLayout) {
                         when (position) {
                             0 -> {
                                 getTabAt(0)
@@ -113,7 +127,7 @@ class MovieDetailsFragment : BaseFragment<MovieDetailsViewModel, FragmentMovieDe
             })
         }
         binding.tabLayout.apply {
-            addTab(this.newTab().setText("Trailers"))
+            addTab(this.newTab().setText("Related Videos"))
             addTab(this.newTab().setText("Similar Movies"))
 
             addOnTabSelectedListener(object : TabLayout.OnTabSelectedListener {

@@ -1,6 +1,7 @@
 package com.gabo.moviesapp.ui.loggedIn.home.seeMoreNowStreaming
 
 import android.os.Bundle
+import android.view.View
 import android.widget.Toast
 import androidx.core.view.isVisible
 import androidx.fragment.app.activityViewModels
@@ -10,9 +11,11 @@ import androidx.recyclerview.widget.LinearLayoutManager
 import com.gabo.moviesapp.R
 import com.gabo.moviesapp.data.models.movieModels.MovieModel
 import com.gabo.moviesapp.databinding.FragmentSeeMoreNowStreamingBinding
+import com.gabo.moviesapp.domain.ConnectionLiveData
 import com.gabo.moviesapp.other.adapters.loadingAdapter.MoviesLoadingAdapter
 import com.gabo.moviesapp.other.adapters.rvAdapters.PopularMoviesAdapter
 import com.gabo.moviesapp.other.base.BaseFragment
+import com.gabo.moviesapp.other.common.isNetworkAvailable
 import com.gabo.moviesapp.other.common.launchStarted
 import com.gabo.moviesapp.ui.MainActivity
 import com.gabo.moviesapp.ui.MainViewModel
@@ -23,15 +26,20 @@ class SeeMoreNowStreamingFragment :
     BaseFragment<SeeMoreNowStreamingViewModel, FragmentSeeMoreNowStreamingBinding>(
         SeeMoreNowStreamingViewModel::class, FragmentSeeMoreNowStreamingBinding::inflate
     ) {
+    private lateinit var connectionLiveData: ConnectionLiveData
     private lateinit var seeMoreNowStreamingAdapter: PopularMoviesAdapter
     private val activityViewModel: MainViewModel by activityViewModels()
 
     override fun setupView(savedInstanceState: Bundle?) {
+        connectionLiveData = ConnectionLiveData(requireContext())
+        checkNetwork()
         setupAdapters()
         listeners()
         val genresList = (activity as MainActivity).genresList
         seeMoreNowStreamingAdapter.submitList(genresList)
-        setupObservers()
+        if (requireContext().isNetworkAvailable) {
+            setupObservers()
+        }
     }
 
     private fun listeners() {
@@ -41,29 +49,11 @@ class SeeMoreNowStreamingFragment :
     }
 
     private fun setupAdapters() {
-        seeMoreNowStreamingAdapter = PopularMoviesAdapter(
-            itemClick = { navigateToDetails(it) },
-            saveClick = { movieModel,i -> saveStateControl(movieModel)
-                seeMoreNowStreamingAdapter.notifyItemChanged(i)}
-        ).also {
+        seeMoreNowStreamingAdapter = PopularMoviesAdapter { navigateToDetails(it) }.also {
             binding.rvSeeMoreNowStreaming.adapter = it.withLoadStateFooter(
                 footer = MoviesLoadingAdapter(requireContext()) { it.retry() })
             binding.rvSeeMoreNowStreaming.layoutManager =
                 LinearLayoutManager(requireContext(), LinearLayoutManager.VERTICAL, false)
-        }
-    }
-
-    private fun saveStateControl(movieModel: MovieModel) {
-        if (movieModel.isSaved == true) {
-            movieModel.isSaved = false
-            activityViewModel.deleteMovie(movieModel.id)
-            ivSaveMovie.setImageResource(R.drawable.ic_save_item)
-            Toast.makeText(requireContext(), "Removed", Toast.LENGTH_SHORT).show()
-        } else {
-            movieModel.isSaved = true
-            activityViewModel.saveMovie(movieModel)
-            ivSaveMovie.setImageResource(R.drawable.ic_save_item_filled)
-            Toast.makeText(requireContext(), "Saved", Toast.LENGTH_SHORT).show()
         }
     }
 
@@ -84,5 +74,24 @@ class SeeMoreNowStreamingFragment :
                 model
             )
         )
+    }
+
+    private fun checkNetwork() {
+        connectionLiveData.observe(this) { isConnected ->
+            with(binding) {
+                if (isConnected) {
+                    tvNoInternet.visibility = View.GONE
+                    if (seeMoreNowStreamingAdapter.itemCount > 0) {
+                        progressBar.visibility = View.GONE
+                    } else {
+                        val genresList = (activity as MainActivity).genresList
+                        seeMoreNowStreamingAdapter.submitList(genresList)
+                        setupObservers()
+                    }
+                } else {
+                    tvNoInternet.visibility = View.VISIBLE
+                }
+            }
+        }
     }
 }

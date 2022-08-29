@@ -13,10 +13,10 @@ import com.gabo.moviesapp.ui.register.RegisterViewModel
 import org.koin.dsl.module
 
 val viewModelsModule = module {
-    factory { HomeViewModel(get(), get(), get()) }
+    factory { HomeViewModel(get(), get()) }
     factory { LogInViewModel() }
     factory { RegisterViewModel() }
-    factory { MovieDetailsViewModel() }
+    factory { MovieDetailsViewModel(get()) }
     factory { MainViewModel(get(), get(), get()) }
     factory { SeeMoreNowStreamingViewModel(get()) }
     factory { ProfileViewModel(get()) }

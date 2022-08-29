@@ -1,44 +1,5 @@
 package com.gabo.moviesapp.other.adapters.rvAdapters
 
-//class SimilarMoviesPagingSource(
-//    private val getSimilarMoviesUseCase: GetSimilarMoviesUseCase,
-//    private val movieId: Int
-//) :
-//    PagingSource<Int, MovieModel>() {
-//    override suspend fun load(params: LoadParams<Int>): LoadResult<Int, MovieModel> {
-//        return try {
-//            val page = params.key ?: 20
-//            if (page != 20) {
-//                delay(1500)
-//            }
-//            val response
-//            = getSimilarMoviesUseCase(Pair(first = movieId, second = page))
-//            var movies: List<MovieModel> = emptyList()
-//
-//            response.body()?.let {
-//                movies = it.movieResults
-//            }
-//            response.errorBody()?.let {
-//                d("ragacaerori",it.string())
-//            }
-//            return LoadResult.Page(
-//                data = movies,
-//                prevKey = if (page > 10) page - 1 else null,
-//                nextKey = if (page < response.body()!!.totalPages) page + 1 else null
-//            )
-//        } catch (e: Exception) {
-//            LoadResult.Error(e)
-//        }
-//    }
-//
-//    override fun getRefreshKey(state: PagingState<Int, MovieModel>): Int? {
-//        return state.anchorPosition?.let { anchorPosition ->
-//            val anchorPage = state.closestPageToPosition(anchorPosition)
-//            anchorPage?.prevKey?.plus(1) ?: anchorPage?.nextKey?.minus(1)
-//        }
-//    }
-//
-//}
 import android.annotation.SuppressLint
 import android.view.LayoutInflater
 import android.view.ViewGroup
@@ -57,8 +18,7 @@ import com.gabo.moviesapp.other.common.loadImage
 import com.gabo.moviesapp.other.common.setupGenres
 
 class SimilarMoviesAdapter(
-    private val itemClick: (MovieModel) -> Unit,
-    private val saveClick: (MovieModel) -> Unit
+    private val itemClick: (MovieModel) -> Unit
 ) :
     RecyclerView.Adapter<SimilarMoviesAdapter.SimilarMoviesVH>() {
     private var genresList: List<GenreModel> = emptyList()
@@ -81,20 +41,13 @@ class SimilarMoviesAdapter(
 
         fun bind(
             model: MovieModel,
-            itemClick: (MovieModel) -> Unit,
-            saveClick: (MovieModel) -> Unit
+            itemClick: (MovieModel) -> Unit
         ) {
             with(binding) {
                 rvGenres.setupGenres(genresList, model)
                 tvTitle.text = model.title
                 tvRating.text = model.Rating.toString()
                 ivPoster.loadImage(model.imageUrl!!)
-                if (model.isSaved == true) {
-                    ivSaveMovie.setImageResource(R.drawable.ic_save_item_filled)
-                } else {
-                    ivSaveMovie.setImageResource(R.drawable.ic_save_item)
-                }
-                ivSaveMovie.setOnClickListener { saveClick(model) }
                 itemView.setOnClickListener { itemClick(model) }
             }
         }
@@ -108,7 +61,7 @@ class SimilarMoviesAdapter(
 
     override fun onBindViewHolder(holder: SimilarMoviesVH, position: Int) {
         val item = list[position]
-        holder.bind(item, itemClick,saveClick)
+        holder.bind(item, itemClick)
     }
 
     override fun getItemCount() = list.size

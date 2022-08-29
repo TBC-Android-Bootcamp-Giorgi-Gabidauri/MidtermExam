@@ -35,5 +35,5 @@
     <string name="saved_movies">Saved Movies</string>
     <string name="username">username</string>
     <string name="email">email</string>
-    <string name="fragment_movies_no_please_connect_to_a_network_text">fragment_movies_no_please_connect_to_a_network_text</string>
+    <string name="please_connect_to_a_network_text">Network connection lost.\nIn order to continue using app properly,\nplease, connect to network</string>
 </resources>

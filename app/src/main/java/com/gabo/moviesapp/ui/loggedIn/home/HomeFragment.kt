@@ -8,11 +8,13 @@ import androidx.core.view.isVisible
 import androidx.fragment.app.activityViewModels
 import androidx.navigation.fragment.findNavController
 import androidx.paging.LoadState
+import androidx.paging.PagingData
 import androidx.paging.map
 import androidx.recyclerview.widget.LinearLayoutManager
 import com.bumptech.glide.Glide
 import com.bumptech.glide.request.RequestOptions
 import com.gabo.moviesapp.R
+import com.gabo.moviesapp.data.models.genreModels.GenreModel
 import com.gabo.moviesapp.data.models.movieModels.MovieModel
 import com.gabo.moviesapp.databinding.FragmentHomeBinding
 import com.gabo.moviesapp.domain.ConnectionLiveData
@@ -29,6 +31,10 @@ import com.gabo.moviesapp.ui.MainViewModel
 import com.gabo.moviesapp.ui.loggedIn.ViewPagerContainerFragmentDirections
 import kotlinx.android.synthetic.main.loading_item.*
 import kotlinx.android.synthetic.main.popular_movie_item.*
+import kotlinx.coroutines.Deferred
+import kotlinx.coroutines.async
+import kotlinx.coroutines.delay
+import kotlinx.coroutines.launch
 
 
 class HomeFragment : BaseFragment<HomeViewModel, FragmentHomeBinding>(
@@ -39,22 +45,23 @@ class HomeFragment : BaseFragment<HomeViewModel, FragmentHomeBinding>(
     private lateinit var popularMoviesAdapter: PopularMoviesAdapter
     private val activityViewModel: MainViewModel by activityViewModels()
     private var nowStreamingMoviesList = emptyList<MovieModel>()
+    private lateinit var genresList: List<GenreModel>
 
     override fun setupView(savedInstanceState: Bundle?) {
         connectionLiveData = ConnectionLiveData(requireContext())
+        genresList = (activity as MainActivity).genresList
+        setupAdapters()
+        setupAdapters()
+        checkNetwork()
+        setupClickListeners()
         if (!requireContext().isNetworkAvailable) {
             with(binding) {
                 tvNoInternet.visibility = View.VISIBLE
-                rvPopularMovies.visibility = View.INVISIBLE
-                llNowStreamingMovies.visibility = View.GONE
-                btnSeeMoreNowStreaming.visibility = View.GONE
-                tvPopular.visibility = View.GONE
-                tvNowStreaming.visibility = View.GONE
+                nsvHome.visibility = View.GONE
             }
+        } else {
+            setupObservers()
         }
-        checkNetwork()
-        setupAdapters()
-        setupClickListeners()
     }
 
     private fun setNowStreamingData(list: List<MovieModel>) {
@@ -68,12 +75,9 @@ class HomeFragment : BaseFragment<HomeViewModel, FragmentHomeBinding>(
     }
 
     private fun setupAdapters() {
-        popularMoviesAdapter = PopularMoviesAdapter(itemClick = {
+        popularMoviesAdapter = PopularMoviesAdapter {
             navigateToDetails(it)
-        }, { movieModel, i ->
-            saveStateControl(movieModel)
-            popularMoviesAdapter.notifyItemChanged(i)
-        }).also {
+        }.also {
             with(binding) {
                 rvPopularMovies.adapter = it
                     .withLoadStateFooter(
@@ -85,23 +89,8 @@ class HomeFragment : BaseFragment<HomeViewModel, FragmentHomeBinding>(
         }
     }
 
-    private fun saveStateControl(movieModel: MovieModel) {
-        if (movieModel.isSaved == true) {
-            movieModel.isSaved = false
-            activityViewModel.deleteMovie(movieModel.id)
-            ivSaveMovie.setImageResource(R.drawable.ic_save_item)
-            Toast.makeText(requireContext(), "Removed", Toast.LENGTH_SHORT).show()
-        } else {
-            movieModel.isSaved = true
-            activityViewModel.saveMovie(movieModel)
-            ivSaveMovie.setImageResource(R.drawable.ic_save_item_filled)
-            Toast.makeText(requireContext(), "Saved", Toast.LENGTH_SHORT).show()
-        }
-    }
-
     private fun setupObservers() {
         if (requireContext().isNetworkAvailable) {
-            binding.progressBar.isVisible = true
             viewLifecycleOwner.launchStarted {
                 with(viewModel) {
                     getNowPlayingMovies().collect {
@@ -110,27 +99,25 @@ class HomeFragment : BaseFragment<HomeViewModel, FragmentHomeBinding>(
                                 nowStreamingMoviesList = it.data?.movieResults?.take(11)!!
                                 setNowStreamingData(nowStreamingMoviesList)
                                 binding.llNowStreamingMovies.isVisible = true
-                                binding.progressBar.isVisible = false
+                                binding.swipeRefresh.isRefreshing = false
                             }
                             is ResponseHandler.Error -> {
                                 d("ragacaeRori", it.errorMSg!!)
-                                binding.progressBar.isVisible = false
+                                binding.swipeRefresh.isRefreshing = false
                             }
                         }
                     }
                 }
             }
 
-            viewLifecycleOwner.launchStarted {scope->
+            viewLifecycleOwner.launchStarted { scope ->
                 with(viewModel) {
-                    getPopularMovies().collect {
-                        it.map {movieModel ->
-                            checkIfMovieExist(movieModel.id)
-                            movieExist.collect{savedOrNot->
-                                movieModel.isSaved = savedOrNot
-                            }
-                        }
-                        popularMoviesAdapter.submitData (it)
+                    getPopularMovies().collect { pagingData ->
+                        activityViewModel.getGenres()
+                        delay(500)
+                        val genresList = (activity as MainActivity).genresList
+                        popularMoviesAdapter.submitList(genresList)
+                        popularMoviesAdapter.submitData(pagingData)
                     }
                 }
                 popularMoviesAdapter.loadStateFlow.collect { loadStates ->
@@ -143,6 +130,12 @@ class HomeFragment : BaseFragment<HomeViewModel, FragmentHomeBinding>(
     private fun setupClickListeners() {
         binding.btnSeeMoreNowStreaming.setOnClickListener {
             findNavController().navigate(ViewPagerContainerFragmentDirections.actionViewPagerContainerFragmentToSeeMoreNowStreamingFragment())
+        }
+        binding.swipeRefresh.setOnRefreshListener {
+            binding.llHome.visibility = View.GONE
+            setupObservers()
+            binding.llHome.visibility = View.VISIBLE
+            binding.swipeRefresh.isRefreshing = false
         }
     }
 
@@ -163,8 +156,6 @@ class HomeFragment : BaseFragment<HomeViewModel, FragmentHomeBinding>(
                     if (popularMoviesAdapter.itemCount > 0) {
                         progressBar.visibility = View.GONE
                     } else {
-                        val genresList = (activity as MainActivity).genresList
-                        popularMoviesAdapter.submitList(genresList)
                         setupObservers()
                     }
                 } else {

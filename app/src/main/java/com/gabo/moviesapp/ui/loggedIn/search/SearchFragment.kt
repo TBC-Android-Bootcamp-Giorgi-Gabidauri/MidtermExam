@@ -2,6 +2,7 @@ package com.gabo.moviesapp.ui.loggedIn.search
 
 import android.annotation.SuppressLint
 import android.os.Bundle
+import android.view.View
 import android.widget.Toast
 import androidx.core.view.isVisible
 import androidx.core.widget.doOnTextChanged
@@ -15,11 +16,13 @@ import androidx.recyclerview.widget.LinearLayoutManager
 import com.gabo.moviesapp.R
 import com.gabo.moviesapp.data.models.movieModels.MovieModel
 import com.gabo.moviesapp.databinding.FragmentSearchBinding
+import com.gabo.moviesapp.domain.ConnectionLiveData
 import com.gabo.moviesapp.other.adapters.loadingAdapter.MoviesLoadingAdapter
 import com.gabo.moviesapp.other.adapters.rvAdapters.PopularMoviesAdapter
 import com.gabo.moviesapp.other.base.BaseFragment
 import com.gabo.moviesapp.other.common.isNetworkAvailable
 import com.gabo.moviesapp.other.common.launchStarted
+import com.gabo.moviesapp.ui.MainActivity
 import com.gabo.moviesapp.ui.MainViewModel
 import com.gabo.moviesapp.ui.loggedIn.ViewPagerContainerFragmentDirections
 import kotlinx.android.synthetic.main.loading_item.*
@@ -31,20 +34,18 @@ import kotlinx.coroutines.launch
 class SearchFragment : BaseFragment<SearchViewModel, FragmentSearchBinding>(
     SearchViewModel::class, FragmentSearchBinding::inflate
 ) {
+    private lateinit var connectionLiveData: ConnectionLiveData
     private lateinit var searchAdapter: PopularMoviesAdapter
-    private val activityViewModel: MainViewModel by activityViewModels()
     override fun setupView(savedInstanceState: Bundle?) {
+        connectionLiveData = ConnectionLiveData(requireContext())
         setupAdapters()
         setupSearchView()
     }
 
     private fun setupAdapters() {
-        searchAdapter = PopularMoviesAdapter(itemClick = {
+        searchAdapter = PopularMoviesAdapter {
             navigateToDetails(it)
-        }, { movieModel, i ->
-            saveStateControl(movieModel)
-            searchAdapter.notifyItemChanged(i)
-        }).also {
+        }.also {
             with(binding) {
                 rvSearch.adapter = it
                     .withLoadStateFooter(
@@ -59,18 +60,19 @@ class SearchFragment : BaseFragment<SearchViewModel, FragmentSearchBinding>(
     private fun setupSearchView() {
         val isNetworkAvailable = requireContext().isNetworkAvailable
 
-        binding.searchView.doOnTextChanged { text, start, before, count ->
+        binding.searchView.doOnTextChanged { text, _, _, _ ->
             @SuppressLint("NotifyDataSetChanged")
-            if (isNetworkAvailable) {
-//                    binding.tvNoInternet.gone()
-
+            if (requireContext().isNetworkAvailable) {
+                binding.tvNoInternet.visibility = View.GONE
                 viewLifecycleOwner.launchStarted {
                     emptyRecyclerView(it)
 
                     viewModel.getSearchedMovies(text.toString()).collectLatest { pagingData ->
-                        val data = pagingData.filter {
-                            it.title.contains(text.toString())
+                        val data = pagingData.filter { movieModel ->
+                            movieModel.title.contains(text.toString())
                         }
+                        val genresList = (activity as MainActivity).genresList
+                        searchAdapter.submitList(genresList)
                         searchAdapter.submitData(data)
                         searchAdapter.notifyDataSetChanged()
                     }
@@ -80,23 +82,9 @@ class SearchFragment : BaseFragment<SearchViewModel, FragmentSearchBinding>(
                 }
             } else if (text != null && !isNetworkAvailable) {
                 emptyRecyclerView(viewLifecycleOwner.lifecycleScope)
-
-//                    binding.tvNoInternet.visible()
+                binding.tvNoInternet.visibility = View.VISIBLE
             }
         }
-
-//        binding.searchView.setOnCloseListener {
-//            binding.searchView.clearFocus()
-//            emptyRecyclerView(viewLifecycleOwner.lifecycleScope)
-//
-//            if (!isNetworkAvailable) {
-//                binding.tvNoInternet.visible()
-//            } else {
-//                binding.tvFindFavourite.visible()
-//                binding.ivFragmentSearchIcon.visible()
-//            }
-//            false
-//        }
     }
 
     @SuppressLint("NotifyDataSetChanged")
@@ -106,19 +94,7 @@ class SearchFragment : BaseFragment<SearchViewModel, FragmentSearchBinding>(
             searchAdapter.notifyDataSetChanged()
         }
     }
-    private fun saveStateControl(movieModel: MovieModel) {
-        if (movieModel.isSaved == true) {
-            movieModel.isSaved = false
-            activityViewModel.deleteMovie(movieModel.id)
-            ivSaveMovie.setImageResource(R.drawable.ic_save_item)
-            Toast.makeText(requireContext(), "Removed", Toast.LENGTH_SHORT).show()
-        } else {
-            movieModel.isSaved = true
-            activityViewModel.saveMovie(movieModel)
-            ivSaveMovie.setImageResource(R.drawable.ic_save_item_filled)
-            Toast.makeText(requireContext(), "Saved", Toast.LENGTH_SHORT).show()
-        }
-    }
+
     private fun navigateToDetails(model: MovieModel) {
         findNavController().navigate(
             ViewPagerContainerFragmentDirections.actionViewPagerContainerFragmentToMovieDetailsFragment(

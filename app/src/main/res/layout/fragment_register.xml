@@ -1,170 +1,196 @@
 <?xml version="1.0" encoding="utf-8"?>
-<androidx.constraintlayout.widget.ConstraintLayout xmlns:android="http://schemas.android.com/apk/res/android"
+<androidx.appcompat.widget.LinearLayoutCompat xmlns:android="http://schemas.android.com/apk/res/android"
     xmlns:app="http://schemas.android.com/apk/res-auto"
     xmlns:tools="http://schemas.android.com/tools"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
     android:background="@color/appBackGround"
+    android:orientation="vertical"
     tools:context=".ui.register.RegisterFragment">
 
     <androidx.appcompat.widget.AppCompatTextView
-        android:id="@+id/tvSignUpHeader"
+        android:id="@+id/tvNoInternet"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:background="@color/black"
+        android:gravity="center"
+        android:visibility="gone"
+        android:padding="@dimen/dimen_16dp"
+        android:text="@string/please_connect_to_a_network_text"
+        android:textColor="@color/white"
+        android:textSize="@dimen/dimen_20sp" />
+
+    <androidx.constraintlayout.widget.ConstraintLayout
+        android:layout_width="match_parent"
+        android:id="@+id/clRegister"
+        android:layout_height="match_parent">
+
+        <androidx.appcompat.widget.AppCompatTextView
+            android:id="@+id/tvSignUpHeader"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_gravity="center"
+            android:layout_margin="20dp"
+            android:text="@string/sign_up"
+            android:textColor="#FF722A"
+            android:textSize="24sp"
+            app:layout_constraintStart_toStartOf="parent"
+            app:layout_constraintTop_toTopOf="parent" />
+
+        <androidx.appcompat.widget.AppCompatImageView
+            android:layout_width="100dp"
+            android:layout_height="100dp"
+            app:layout_constraintBottom_toTopOf="@id/tilUserNameLayout"
+            app:layout_constraintEnd_toEndOf="parent"
+            app:layout_constraintStart_toStartOf="parent"
+            app:layout_constraintTop_toBottomOf="@id/tvSignUpHeader"
+            app:srcCompat="@drawable/ic_app_logo_for_pages" />
+
+        <com.google.android.material.textfield.TextInputLayout
+            android:id="@+id/tilUserNameLayout"
+            style="@style/Widget.MaterialComponents.TextInputLayout.FilledBox"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:layout_marginStart="20dp"
+            android:layout_marginEnd="20dp"
+            android:layout_marginBottom="40dp"
+            android:textColorHint="#9C9C9C"
+            app:boxStrokeColor="#FF722A"
+            app:boxStrokeWidth="@dimen/dimen_0dp"
+            app:hintTextColor="#FF722A"
+            app:layout_constraintBottom_toTopOf="@+id/btnRegister"
+            app:layout_constraintTop_toBottomOf="@id/tvSignUpHeader"
+            app:startIconDrawable="@drawable/ic_person_icon"
+            app:startIconTint="#FF722A">
+
+            <com.google.android.material.textfield.TextInputEditText
+                android:id="@+id/etUserName"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:background="@drawable/ic_input_rectangle"
+                android:hint="@string/enter_username"
+                android:inputType="textEmailAddress"
+                android:textColor="@color/white" />
+
+        </com.google.android.material.textfield.TextInputLayout>
+
+        <com.google.android.material.textfield.TextInputLayout
+            android:id="@+id/tilEmailLayout"
+            style="@style/Widget.MaterialComponents.TextInputLayout.FilledBox"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:layout_marginStart="20dp"
+            android:layout_marginTop="20dp"
+            android:layout_marginEnd="20dp"
+            android:textColorHint="#9C9C9C"
+            app:boxStrokeColor="#FF722A"
+            app:boxStrokeWidth="@dimen/dimen_0dp"
+            app:hintTextColor="#FF722A"
+            app:layout_constraintTop_toBottomOf="@id/tilUserNameLayout"
+            app:startIconDrawable="@drawable/ic_email_book_icon"
+            app:startIconTint="#FF722A">
+
+            <com.google.android.material.textfield.TextInputEditText
+                android:id="@+id/etEmail"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:background="@drawable/ic_input_rectangle"
+                android:hint="@string/enter_your_email"
+                android:inputType="textEmailAddress"
+                android:textColor="@color/white" />
+
+        </com.google.android.material.textfield.TextInputLayout>
+
+        <com.google.android.material.textfield.TextInputLayout
+            android:id="@+id/tilPasswordLayout"
+            style="@style/Widget.MaterialComponents.TextInputLayout.FilledBox"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:layout_marginStart="20dp"
+            android:layout_marginTop="15dp"
+            android:layout_marginEnd="20dp"
+            android:textColorHint="#9C9C9C"
+            app:boxStrokeColor="#FF722A"
+            app:boxStrokeWidth="@dimen/dimen_0dp"
+            app:hintTextColor="#FF722A"
+            app:layout_constraintTop_toBottomOf="@id/tilEmailLayout"
+            app:passwordToggleDrawable="@drawable/ic_show_pass_icon"
+            app:passwordToggleEnabled="true"
+            app:passwordToggleTint="#FF722A"
+            app:startIconDrawable="@drawable/ic_lock_icon"
+            app:startIconTint="#FF722A">
+
+            <com.google.android.material.textfield.TextInputEditText
+                android:id="@+id/etPassword"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:background="@drawable/ic_input_rectangle"
+                android:hint="@string/enter_your_password"
+                android:inputType="textPassword"
+                android:textColor="@color/white" />
+
+        </com.google.android.material.textfield.TextInputLayout>
+
+        <com.google.android.material.textfield.TextInputLayout
+            android:id="@+id/tilRepeatPassLayout"
+            style="@style/Widget.MaterialComponents.TextInputLayout.FilledBox"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:layout_marginStart="20dp"
+            android:layout_marginTop="15dp"
+            android:layout_marginEnd="20dp"
+            android:textColorHint="#9C9C9C"
+            app:boxStrokeColor="#FF722A"
+            app:boxStrokeWidth="@dimen/dimen_0dp"
+            app:hintTextColor="#FF722A"
+            app:layout_constraintTop_toBottomOf="@id/tilPasswordLayout"
+            app:passwordToggleDrawable="@drawable/ic_show_pass_icon"
+            app:passwordToggleEnabled="true"
+            app:passwordToggleTint="#FF722A"
+            app:startIconDrawable="@drawable/ic_lock_icon"
+            app:startIconTint="#FF722A">
+
+            <com.google.android.material.textfield.TextInputEditText
+                android:id="@+id/etRepeatPassword"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:background="@drawable/ic_input_rectangle"
+                android:hint="@string/repeat_password"
+                android:inputType="textPassword"
+                android:textColor="@color/white" />
+
+        </com.google.android.material.textfield.TextInputLayout>
+
+        <androidx.appcompat.widget.AppCompatButton
+            android:id="@+id/btnRegister"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:layout_margin="20dp"
+            android:background="@drawable/ic_button_background"
+            android:gravity="center"
+            android:text="@string/create_account"
+            android:textColor="@color/white"
+            android:textSize="20sp"
+            app:layout_constraintBottom_toTopOf="@id/logInLink" />
+
+        <androidx.appcompat.widget.AppCompatTextView
+            android:id="@+id/logInLink"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:layout_marginTop="30dp"
+            android:layout_marginBottom="30dp"
+            android:gravity="center"
+            android:text="@string/already_have_an_account_login"
+            android:textColor="#9C9C9C"
+            android:textSize="18sp"
+            app:layout_constraintBottom_toBottomOf="parent" />
+    </androidx.constraintlayout.widget.ConstraintLayout>
+
+    <ProgressBar
+        android:id="@+id/progressBar"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
-        android:layout_gravity="center"
-        android:layout_margin="20dp"
-        android:text="@string/sign_up"
-        android:textColor="#FF722A"
-        android:textSize="24sp"
-        app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toTopOf="parent" />
-
-    <androidx.appcompat.widget.AppCompatImageView
-        android:layout_width="100dp"
-        android:layout_height="100dp"
-        app:srcCompat="@drawable/ic_app_logo_for_pages"
-        app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintEnd_toEndOf="parent"
-        app:layout_constraintTop_toBottomOf="@id/tvSignUpHeader"
-        app:layout_constraintBottom_toTopOf="@id/tilUserNameLayout"/>
-
-    <com.google.android.material.textfield.TextInputLayout
-        android:id="@+id/tilUserNameLayout"
-        style="@style/Widget.MaterialComponents.TextInputLayout.FilledBox"
-        android:layout_width="match_parent"
-        android:layout_height="wrap_content"
-        android:layout_marginStart="20dp"
-        android:layout_marginEnd="20dp"
-        android:layout_marginBottom="40dp"
-        android:textColorHint="#9C9C9C"
-        app:boxStrokeColor="#FF722A"
-        app:boxStrokeWidth="@dimen/dimen_0dp"
-        app:hintTextColor="#FF722A"
-        app:layout_constraintBottom_toTopOf="@+id/btnRegister"
-        app:layout_constraintTop_toBottomOf="@id/tvSignUpHeader"
-        app:startIconDrawable="@drawable/ic_person_icon"
-        app:startIconTint="#FF722A">
-
-        <com.google.android.material.textfield.TextInputEditText
-            android:id="@+id/etUserName"
-            android:layout_width="match_parent"
-            android:layout_height="wrap_content"
-            android:background="@drawable/ic_input_rectangle"
-            android:hint="@string/enter_username"
-            android:textColor="@color/white"
-            android:inputType="textEmailAddress" />
-
-    </com.google.android.material.textfield.TextInputLayout>
-
-    <com.google.android.material.textfield.TextInputLayout
-        android:id="@+id/tilEmailLayout"
-        style="@style/Widget.MaterialComponents.TextInputLayout.FilledBox"
-        android:layout_width="match_parent"
-        android:layout_height="wrap_content"
-        android:layout_marginStart="20dp"
-        android:layout_marginTop="20dp"
-        android:layout_marginEnd="20dp"
-        android:textColorHint="#9C9C9C"
-        app:boxStrokeColor="#FF722A"
-        app:boxStrokeWidth="@dimen/dimen_0dp"
-        app:hintTextColor="#FF722A"
-        app:layout_constraintTop_toBottomOf="@id/tilUserNameLayout"
-        app:startIconDrawable="@drawable/ic_email_book_icon"
-        app:startIconTint="#FF722A">
-
-        <com.google.android.material.textfield.TextInputEditText
-            android:id="@+id/etEmail"
-            android:layout_width="match_parent"
-            android:layout_height="wrap_content"
-            android:background="@drawable/ic_input_rectangle"
-            android:hint="@string/enter_your_email"
-            android:textColor="@color/white"
-            android:inputType="textEmailAddress" />
-
-    </com.google.android.material.textfield.TextInputLayout>
-
-    <com.google.android.material.textfield.TextInputLayout
-        android:id="@+id/tilPasswordLayout"
-        style="@style/Widget.MaterialComponents.TextInputLayout.FilledBox"
-        android:layout_width="match_parent"
-        android:layout_height="wrap_content"
-        android:layout_marginStart="20dp"
-        android:layout_marginTop="15dp"
-        android:layout_marginEnd="20dp"
-        android:textColorHint="#9C9C9C"
-        app:boxStrokeColor="#FF722A"
-        app:boxStrokeWidth="@dimen/dimen_0dp"
-        app:hintTextColor="#FF722A"
-        app:layout_constraintTop_toBottomOf="@id/tilEmailLayout"
-        app:passwordToggleDrawable="@drawable/ic_show_pass_icon"
-        app:passwordToggleEnabled="true"
-        app:passwordToggleTint="#FF722A"
-        app:startIconDrawable="@drawable/ic_lock_icon"
-        app:startIconTint="#FF722A">
-
-        <com.google.android.material.textfield.TextInputEditText
-            android:id="@+id/etPassword"
-            android:layout_width="match_parent"
-            android:layout_height="wrap_content"
-            android:background="@drawable/ic_input_rectangle"
-            android:hint="@string/enter_your_password"
-            android:textColor="@color/white"
-            android:inputType="textPassword" />
-
-    </com.google.android.material.textfield.TextInputLayout>
-
-    <com.google.android.material.textfield.TextInputLayout
-        android:id="@+id/tilRepeatPassLayout"
-        style="@style/Widget.MaterialComponents.TextInputLayout.FilledBox"
-        android:layout_width="match_parent"
-        android:layout_height="wrap_content"
-        android:layout_marginStart="20dp"
-        android:layout_marginTop="15dp"
-        android:layout_marginEnd="20dp"
-        android:textColorHint="#9C9C9C"
-        app:boxStrokeColor="#FF722A"
-        app:boxStrokeWidth="@dimen/dimen_0dp"
-        app:hintTextColor="#FF722A"
-        app:layout_constraintTop_toBottomOf="@id/tilPasswordLayout"
-        app:passwordToggleDrawable="@drawable/ic_show_pass_icon"
-        app:passwordToggleEnabled="true"
-        app:passwordToggleTint="#FF722A"
-        app:startIconDrawable="@drawable/ic_lock_icon"
-        app:startIconTint="#FF722A">
-
-        <com.google.android.material.textfield.TextInputEditText
-            android:id="@+id/etRepeatPassword"
-            android:layout_width="match_parent"
-            android:layout_height="wrap_content"
-            android:background="@drawable/ic_input_rectangle"
-            android:hint="@string/repeat_password"
-            android:textColor="@color/white"
-            android:inputType="textPassword" />
-
-    </com.google.android.material.textfield.TextInputLayout>
-
-    <androidx.appcompat.widget.AppCompatButton
-        android:id="@+id/btnRegister"
-        android:layout_width="match_parent"
-        android:layout_height="wrap_content"
-        android:layout_margin="20dp"
-        android:background="@drawable/ic_button_background"
-        android:gravity="center"
-        android:text="@string/create_account"
-        android:textColor="@color/white"
-        android:textSize="20sp"
-        app:layout_constraintBottom_toTopOf="@id/logInLink" />
-
-    <androidx.appcompat.widget.AppCompatTextView
-        android:id="@+id/logInLink"
-        android:layout_width="match_parent"
-        android:layout_height="wrap_content"
-        android:layout_marginTop="30dp"
-        android:layout_marginBottom="30dp"
-        android:gravity="center"
-        android:text="@string/already_have_an_account_login"
-        android:textColor="#9C9C9C"
-        android:textSize="18sp"
-        app:layout_constraintBottom_toBottomOf="parent" />
-
-</androidx.constraintlayout.widget.ConstraintLayout>
+        android:layout_marginTop="@dimen/dimen_150dp"
+        android:visibility="gone"
+        android:layout_gravity="center"/>
+</androidx.appcompat.widget.LinearLayoutCompat>
