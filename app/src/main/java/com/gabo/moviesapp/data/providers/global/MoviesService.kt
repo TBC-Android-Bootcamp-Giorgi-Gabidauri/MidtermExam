@@ -1,4 +1,4 @@
-package com.gabo.moviesapp.data.service
+package com.gabo.moviesapp.data.providers.global
 
 import com.gabo.moviesapp.data.models.genreModels.GenresModel
 import com.gabo.moviesapp.data.models.movieModels.MoviesModel
