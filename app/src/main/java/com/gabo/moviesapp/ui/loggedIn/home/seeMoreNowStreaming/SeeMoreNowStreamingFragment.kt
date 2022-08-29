@@ -69,11 +69,13 @@ class SeeMoreNowStreamingFragment :
     }
 
     private fun navigateToDetails(model: MovieModel) {
-        findNavController().navigate(
-            SeeMoreNowStreamingFragmentDirections.actionSeeMoreNowStreamingFragmentToMovieDetailsFragment(
-                model
+        if (requireContext().isNetworkAvailable){
+            findNavController().navigate(
+                SeeMoreNowStreamingFragmentDirections.actionSeeMoreNowStreamingFragmentToMovieDetailsFragment(
+                    model
+                )
             )
-        )
+        }
     }
 
     private fun checkNetwork() {

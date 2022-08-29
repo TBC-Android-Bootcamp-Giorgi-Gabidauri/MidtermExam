@@ -69,11 +69,13 @@ class ProfileFragment : BaseFragment<ProfileViewModel, FragmentProfileBinding>(
     }
 
     private fun navigateToDetails(model: MovieModel) {
-        findNavController().navigate(
-            ViewPagerContainerFragmentDirections.actionViewPagerContainerFragmentToMovieDetailsFragment(
-                model
+        if (requireContext().isNetworkAvailable){
+            findNavController().navigate(
+                ViewPagerContainerFragmentDirections.actionViewPagerContainerFragmentToMovieDetailsFragment(
+                    model
+                )
             )
-        )
+        }
     }
 
     private fun setupObservers() {
