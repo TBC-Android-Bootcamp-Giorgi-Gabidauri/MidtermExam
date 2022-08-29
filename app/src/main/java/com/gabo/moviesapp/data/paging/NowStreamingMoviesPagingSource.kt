@@ -3,10 +3,10 @@ package com.gabo.moviesapp.data.paging
 import androidx.paging.PagingSource
 import androidx.paging.PagingState
 import com.gabo.moviesapp.data.models.movieModels.MovieModel
-import com.gabo.moviesapp.domain.usecases.GetNowPlayingMoviesUseCase
+import com.gabo.moviesapp.domain.usecases.GetNowStreamingMoviesUseCase
 import kotlinx.coroutines.delay
 
-class NowStreamingMoviesPagingSource(private val getNowPlayingMoviesUseCase: GetNowPlayingMoviesUseCase) :
+class NowStreamingMoviesPagingSource(private val getNowPlayingMoviesUseCase: GetNowStreamingMoviesUseCase) :
     PagingSource<Int, MovieModel>() {
     override suspend fun load(params: LoadParams<Int>): LoadResult<Int, MovieModel> {
         return try {

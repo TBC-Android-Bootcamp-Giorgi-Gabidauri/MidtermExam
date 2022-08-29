@@ -5,7 +5,7 @@ import com.gabo.moviesapp.data.repository.Repository
 import com.gabo.moviesapp.other.base.BaseUseCase
 import retrofit2.Response
 
-class GetNowPlayingMoviesUseCase(private val repository: Repository): BaseUseCase<Int,Response<MoviesModel>>() {
+class GetNowStreamingMoviesUseCase(private val repository: Repository): BaseUseCase<Int,Response<MoviesModel>>() {
     override suspend fun invoke(params: Int): Response<MoviesModel> {
         return repository.getNowPlayingMovies(params)
     }

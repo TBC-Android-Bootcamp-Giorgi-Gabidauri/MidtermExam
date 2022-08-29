@@ -24,7 +24,7 @@ class RegisterViewModel : ViewModel() {
                     db.child(FirebaseAuth.getInstance().currentUser?.uid!!).setValue(userInfo)
                     _registrationState.value = "Successful"
                 } else {
-                    _registrationState.value = "Error!"
+                    _registrationState.value = it.exception?.message.toString()
                 }
             }
         }

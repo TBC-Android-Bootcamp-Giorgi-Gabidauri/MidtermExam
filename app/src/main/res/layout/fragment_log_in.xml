@@ -81,6 +81,7 @@
             android:textColorHint="#9C9C9C"
             app:boxStrokeColor="#FF722A"
             app:boxStrokeWidth="@dimen/dimen_0dp"
+            android:id="@+id/tilPasswordLayout"
             app:hintTextColor="#FF722A"
             app:layout_constraintTop_toBottomOf="@id/tilEmailLayout"
             app:passwordToggleDrawable="@drawable/ic_show_pass_icon"

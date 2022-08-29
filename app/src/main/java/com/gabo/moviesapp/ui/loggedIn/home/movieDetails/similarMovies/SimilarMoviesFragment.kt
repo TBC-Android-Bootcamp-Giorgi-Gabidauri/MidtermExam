@@ -67,11 +67,13 @@ class SimilarMoviesFragment : BaseFragment<SimilarMoviesViewModel, FragmentSimil
     }
 
     private fun navigateToDetails(model: MovieModel) {
-        findNavController().navigate(
-            MovieDetailsFragmentDirections.actionMovieDetailsFragmentSelf(
-                model
+        if(requireContext().isNetworkAvailable){
+            findNavController().navigate(
+                MovieDetailsFragmentDirections.actionMovieDetailsFragmentSelf(
+                    model
+                )
             )
-        )
+        }
     }
 
     private fun checkNetwork() {

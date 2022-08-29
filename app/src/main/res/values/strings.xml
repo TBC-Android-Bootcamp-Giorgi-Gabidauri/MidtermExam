@@ -36,4 +36,7 @@
     <string name="username">username</string>
     <string name="email">email</string>
     <string name="please_connect_to_a_network_text">Network connection lost.\nIn order to continue using app properly,\nplease, connect to network</string>
+    <string name="errorEmpty">Required* Please Fill This Fields</string>
+    <string name="errorEmail">Required* Does Not matches Email Pattern</string>
+    <string name="passDoesNotMatch">passwords does not match</string>
 </resources>
