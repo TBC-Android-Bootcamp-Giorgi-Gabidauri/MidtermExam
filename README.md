@@ -25,7 +25,8 @@ How To Use
 - list of Popular Movies.
 - you can scroll through the genres to see them all.
 
-<img src="https://user-images.githubusercontent.com/66998427/187107865-c65d13f1-8db7-411a-a55e-012a3b31bf9d.png" width="300" height="600"> | <img src="(https://user-images.githubusercontent.com/66998427/187107867-3e2ac33a-ac7b-452d-8775-71e981f16c3e.png" width="300" height="600">
+<img src="https://user-images.githubusercontent.com/66998427/187107865-c65d13f1-8db7-411a-a55e-012a3b31bf9d.png" width="300" height="600"> | <img src="https://user-images.githubusercontent.com/66998427/187110831-9c126bb2-d61f-4bee-8abc-cc584b8b1856.png" width="300" height="600">
+
 
 # to see more details about current film, just click on it and you will navigate to movie details screen.
 - here you can see poster, description, raiting, genres and more.
