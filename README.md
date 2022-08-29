@@ -17,9 +17,8 @@ in this app you can:
 How To Use
 -----------
 - to use app user needs an account.
-<img src="https://your-image-url.type" width="100" height="100">
-
-<img src = "https://user-images.githubusercontent.com/66998427/187107806-1a4c2f5e-6957-4896-ba46-51f27f6532c7.png" width = "100" height = "100">
+<img src="https://your-image-url.type" width="200" height="300">
+![login](https://user-images.githubusercontent.com/66998427/187107806-1a4c2f5e-6957-4896-ba46-51f27f6532c7.png)
 ![register](https://user-images.githubusercontent.com/66998427/187107816-e3e0e87a-1867-40e6-b1cb-b9c57d9f617e.png)
 
 on the first page (Home) you can see:
