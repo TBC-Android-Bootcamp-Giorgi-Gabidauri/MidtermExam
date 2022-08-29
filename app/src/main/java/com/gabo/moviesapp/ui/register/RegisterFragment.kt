@@ -47,31 +47,37 @@ class RegisterFragment : BaseFragment<RegisterViewModel, FragmentRegisterBinding
     }
 
     private fun listeners() {
-        binding.logInLink.setOnClickListener {
+        binding.btnRegister.setOnClickListener {
             with(binding) {
                 if (etEmail.text.toString().isNotEmpty() && etPassword.text.toString()
                         .isNotEmpty() && etUserName.text.toString()
                         .isNotEmpty() && etRepeatPassword.text.toString().isNotEmpty()
-                ){
-                    findNavController().navigate(RegisterFragmentDirections.actionRegisterFragmentToLogInFragment())
-                } else{
-                    Toast.makeText(requireContext(), "Please fill all fields", Toast.LENGTH_SHORT).show()
+                ) {
+                    register(
+                        binding.etUserName.text.toString().trim(),
+                        binding.etEmail.text.toString().trim(),
+                        binding.etPassword.text.toString().trim(),
+                        binding.etRepeatPassword.text.toString().trim(),
+                    )
+                } else {
+                    Toast.makeText(requireContext(), "Please fill all fields", Toast.LENGTH_SHORT)
+                        .show()
                 }
             }
         }
-        binding.btnRegister.setOnClickListener {
+        binding.logInLink.setOnClickListener {
             if (requireContext().isNetworkAvailable) {
-                register(
-                    binding.etUserName.text.toString().trim(),
-                    binding.etEmail.text.toString().trim(),
-                    binding.etPassword.text.toString().trim(),
-                    binding.etRepeatPassword.text.toString().trim(),
-                )
+                findNavController().navigate(RegisterFragmentDirections.actionRegisterFragmentToLogInFragment())
             }
         }
     }
 
-    private fun register(username: String, email: String, password: String, repeatedPassword: String) {
+    private fun register(
+        username: String,
+        email: String,
+        password: String,
+        repeatedPassword: String
+    ) {
         if (requireContext().isNetworkAvailable) {
             viewLifecycleOwner.launchStarted {
                 binding.progressBar.visibility = View.VISIBLE
